@@ -17,7 +17,7 @@ public class Main extends JFrame {
     FileReader fileReader = new FileReader("./resources/application.properties");
 
     Properties properties = new Properties();
-  
+
 //    FileReader fileReader = new FileReader("C:\\Users\\Nick\\Desktop\\Proj\\Client_ui\\resources\\application.properties");
 //    Properties properties = new Properties();
 
