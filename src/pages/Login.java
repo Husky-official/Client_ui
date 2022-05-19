@@ -60,7 +60,6 @@ public class Login extends JFrame {
         this.registerButton.setForeground(Color.WHITE);
         this.registerButton.setFocusPainted(false);
         this.registerButton.setFont(new Font("nunito", Font.PLAIN, 15));
-
         this.registerButton.setFocusPainted(false);
         this.registerButton.setBorderPainted(false);
         this.loginButton.setBackground(this.bgColor);
