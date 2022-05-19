@@ -1,48 +1,33 @@
 package src;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import src.client.ClientServerConnector;
-import src.models.RequestBody;
+
 import src.pages.Home;
+import src.pages.dashboard.Dashboard;
+import src.pages.dashboard.DashboardPage;
 
 import javax.swing.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 
 public class Main extends JFrame {
 
-    private JLabel label;
+    FileReader fileReader = new FileReader("C:\\Users\\dabagirevalens\\IdeaProjects\\Client_ui\\resources\\application.properties");
+    Properties properties = new Properties();
 
-    public Main() throws Exception {
-        Welcome();
-    }
+    public Main() throws IOException {
 
-    public void Welcome() throws Exception{
+        properties.load(fileReader);
+        boolean logged_in = Boolean.parseBoolean(properties.getProperty("logged_in"));
+        System.out.println(logged_in);
 
-        setTitle("HIRIC");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
-        setIconImage(new ImageIcon("src/img/dv.png").getImage());
-
-        label = new JLabel();
-        add(label);
-
-        RequestBody requestBody = new RequestBody();
-        requestBody.setUrl("/welcome");
-        requestBody.setAction("welcome");
-        requestBody.setObject(null);
-
-        String request = new ObjectMapper().writeValueAsString(requestBody);
-
-        ClientServerConnector clientServerConnector = new ClientServerConnector();
-        String response = clientServerConnector.connect(request);
-
-        label.setText(response);
-
-
-        Home home = new Home();
-        add(home);
+        //change layout if user logged in
+        if (logged_in){
+            this.add(new DashboardPage());
+        }else {
+            this.add(new Home());
+        }
     }
 
     public static void main(String[] args) throws Exception {

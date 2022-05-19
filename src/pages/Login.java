@@ -1,44 +1,48 @@
 package src.pages;
 
-import src.components.shared.Button;
-
+import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
-import javax.swing.*;
 
-public class Home extends JFrame {
+public class Login extends JFrame {
 
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
     private JButton registerButton;
     private JButton loginButton;
 
-    public Home() {
-        this.setTitle("Hiric");
+
+    public Login() {
+        this.setTitle("Login | Hiric");
         this.setSize(1000, 600);
-        this.initUI();
-        this.setLocationRelativeTo((Component)null);
+        this.setLocationRelativeTo((Component) null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
+        this.initUI();
     }
 
     public void initUI() {
-
         this.setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/src/img/logo.png"))).getImage());
 
         JPanel contentPanel = new JPanel(new BorderLayout());
         JPanel headPanel = new JPanel(new BorderLayout());
         JPanel bodyPanel = new JPanel(new GridBagLayout());
 
-        this.registerButton = new Button("Register", Color.WHITE, textColor, new Font("nunito", Font.PLAIN, 15) , 0);
+        this.registerButton = new JButton("Register");
         this.loginButton = new JButton("Login");
 
         JLabel appBrand = new JLabel("Hiric");
-        JLabel welcomeText = new JLabel("Welcome to Hiric");
-        JLabel instructionText = new JLabel("It's time to get your work done!!");
+        JLabel welcomeText = new JLabel("Login Into Your Account");
 
         appBrand.setFont(new Font("nunito", Font.BOLD, 25));
         appBrand.setForeground(this.textColor);
+        appBrand.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Home home = new Home();
+                home.setVisible(true);
+                dispose();
+            }
+        });
         headPanel.setPreferredSize(new Dimension(0, 80));
         headPanel.setBackground(this.bgColor);
         bodyPanel.setBackground(this.bgColor);
@@ -52,6 +56,13 @@ public class Home extends JFrame {
         headRightPanel.setBorder(BorderFactory.createEmptyBorder(20, 5, 20, 50));
         headLeftPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 5));
 
+        this.registerButton.setBackground(this.textColor);
+        this.registerButton.setForeground(Color.WHITE);
+        this.registerButton.setFocusPainted(false);
+        this.registerButton.setFont(new Font("nunito", Font.PLAIN, 15));
+
+        this.registerButton.setFocusPainted(false);
+        this.registerButton.setBorderPainted(false);
         this.loginButton.setBackground(this.bgColor);
         this.loginButton.setFont(new Font("nunito", 0, 17));
         this.loginButton.setForeground(this.textColor);
@@ -64,6 +75,7 @@ public class Home extends JFrame {
             login.setVisible(true);
             this.dispose();
         });
+
         this.registerButton.addActionListener(e -> {
             Register register = new Register();
             register.setVisible(true);
@@ -75,36 +87,34 @@ public class Home extends JFrame {
 
         welcomeText.setFont(new Font("nunito", Font.BOLD, 30));
         welcomeText.setForeground(this.textColor);
-        instructionText.setForeground(Color.GRAY);
-        instructionText.setFont(new Font("nunito", 0, 15));
+
 
         JPanel panel1 = new JPanel(new GridBagLayout());
-        panel1.setBorder(BorderFactory.createEmptyBorder(60, 0, 3, 0));
+        panel1.setBorder(BorderFactory.createEmptyBorder(80, 0, 3, 0));
         panel1.add(welcomeText);
         panel1.setBackground(this.bgColor);
         bodyContent.add(panel1);
 
+        /**
+         * Add login form
+         * */
+
+
+
         JPanel panel2 = new JPanel(new GridBagLayout());
         panel2.setBorder(BorderFactory.createEmptyBorder(0, 0, 25, 0));
-        panel2.add(instructionText);
         panel2.setBackground(this.bgColor);
         bodyContent.add(panel2);
 
-        JPanel hiricImage = new JPanel(new GridBagLayout());
-        hiricImage.setBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0));
-        ImageIcon image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/src/img/logo-2.png")));
-        Image img = image.getImage().getScaledInstance(220, 220, Image.SCALE_SMOOTH);
-        hiricImage.add(new JLabel(new ImageIcon(img)));
-        hiricImage.setBackground(this.bgColor);
-        bodyContent.add(hiricImage);
+        // end of login form
 
         JLabel copyright = new JLabel("Copyright 2022 @husky | All Right Reserved.");
         copyright.setFont(new Font("nunito", Font.ITALIC, 15));
         copyright.setForeground(Color.GRAY);
 
         JPanel footer = new JPanel(new GridBagLayout());
-        if(this.getSize().height == 600){
-            footer.setBorder(BorderFactory.createEmptyBorder(60, 0, 0, 0));
+        if (this.getSize().height == 600) {
+            footer.setBorder(BorderFactory.createEmptyBorder(235, 0, 0, 0));
         }
         footer.add(copyright);
         footer.setBackground(this.bgColor);
