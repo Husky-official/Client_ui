@@ -6,6 +6,7 @@ import src.models.RequestBody;
 import src.pages.Home;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main extends JFrame {
 
@@ -39,7 +40,6 @@ public class Main extends JFrame {
         String response = clientServerConnector.connect(request);
 
         label.setText(response);
-
 
         Home home = new Home();
         add(home);
