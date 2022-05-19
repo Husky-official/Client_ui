@@ -36,6 +36,13 @@ public class Login extends JFrame {
 
         appBrand.setFont(new Font("nunito", Font.BOLD, 25));
         appBrand.setForeground(this.textColor);
+        appBrand.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Home home = new Home();
+                home.setVisible(true);
+                dispose();
+            }
+        });
         headPanel.setPreferredSize(new Dimension(0, 80));
         headPanel.setBackground(this.bgColor);
         bodyPanel.setBackground(this.bgColor);
