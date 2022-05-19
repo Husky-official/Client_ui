@@ -23,13 +23,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
-/**
- * SimpleSoundCapture Example. This is a simple program to record sounds and
- * play them back. It uses some methods from the CapturePlayback program in the
- * JavaSoundDemo. For licensizing reasons the disclaimer above is included.
- *
- * @author Steve Potts
- */
 public class SimpleSoundCapture extends JPanel implements ActionListener {
 
     final int bufSize = 16384;
