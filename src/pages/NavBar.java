@@ -23,16 +23,13 @@ public class NavBar extends JLayeredPane {
         searchPane.isCursorSet();
         searchPane.setBounds(130, 10, 200, 30);
         searchPane.setBackground(new Color(237,237,247));
-//        BufferedImage searchIconSource = ImageIO.read(new File("A:\\Projects\\Client_ui\\src\\img\\search.svg"));
-//        JLabel searchIcon = new JLabel((Icon) searchIconSource);
-//        searchIcon.setBounds(45, 10, 30, 15);
 
 
         ImageIcon imageIcon = new ImageIcon("src/img/search.svg");
         JLabel searchIcon = new JLabel(imageIcon);
         searchIcon.setBounds(5,10,10,10);
         searchIcon.setOpaque(true);
-//
+
         JLabel search = new JLabel("Search...");
         search.setFont(textFont);
         search.setForeground(Color.gray);
