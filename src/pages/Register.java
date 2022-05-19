@@ -163,7 +163,7 @@ public class Register extends JFrame {
                 }
         );
         panel = new JPanel();
-        panel.setLayout(new GridLayout(15, 1,2,2));
+        panel.setLayout(new GridLayout(19, 1,2,2));
         panel.setBackground(this.bgColor);
         // adding radio buttons to panel in a group
         ButtonGroup group = new ButtonGroup();
@@ -195,6 +195,8 @@ public class Register extends JFrame {
         panel.add(dob);
         panel.add(dobField);
         panel.add(genderLabel);
+        panel.add(maleRadioButton);
+        panel.add(femaleRadioButton);
         panel.add(submitButton);
     }
 
