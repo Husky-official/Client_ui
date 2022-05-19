@@ -1,6 +1,8 @@
 package src.pages.layout;
 
 import src.pages.dashboard.DashboardPage;
+import src.pages.hiring.HiringPage;
+import src.pages.hiring.JobPostingPage;
 import src.pages.profile.ProfilePage;
 
 import javax.swing.*;
@@ -138,12 +140,23 @@ public class SideBar extends JPanel {
         JPanel postPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         postPanel.setBackground(this.bgColor);
         postPanel.add(new JLabel(new ImageIcon(post_img)));
-        JLabel post = new JLabel("Post   ");
+        JLabel post = new JLabel("Hiring   ");
         post.setFont(new Font("nunito", Font.ITALIC, 15));
         postPanel.add(post);
         postPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                System.out.println("Post");
+                HiringPage hiringPage = new HiringPage();
+                hiringPage.setVisible(true);
+                Frame[] frames = Frame.getFrames();
+                for(Frame fr : frames){
+                    String specificFrameName = fr.getClass().getName();
+                    if(!specificFrameName.equals("src.pages.hiring.HiringPage")){
+                        if(fr.getSize().width > 600){
+                            hiringPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        }
+                        fr.dispose();
+                    }
+                }
             }
         });
 
