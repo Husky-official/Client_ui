@@ -1,9 +1,12 @@
 package src.pages;
 
+import src.models.UserUtils;
 import src.utils.IconTextField;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class Register extends JFrame {
@@ -104,16 +107,22 @@ public class Register extends JFrame {
         this.add(contentPanel);
     }
     private void createUIComponents() {
-
+        JLabel errorLabel = new JLabel("");
         JLabel accountTypeLabel = new JLabel("Account Type:");
         JLabel usernameLabel = new JLabel("Username:");
         JLabel passwordLabel = new JLabel("Password:");
         JLabel telephoneLabel = new JLabel("Telephone:");
         JLabel emailLabel = new JLabel("Email:");
+        JLabel genderLabel = new JLabel("Gender: ");
+        JLabel dob = new JLabel("Date of Birth: ");
         IconTextField accountTypeField = new IconTextField();
         IconTextField usernameField = new IconTextField();
         IconTextField passwordField = new IconTextField();
         IconTextField telephoneField = new IconTextField();
+        JRadioButton maleRadioButton = new JRadioButton("Male");
+        JRadioButton femaleRadioButton = new JRadioButton("Female");
+        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        JFormattedTextField dobField = new JFormattedTextField(dateFormat);
         IconTextField emailField = new IconTextField();
         JButton submitButton = new JButton("Register");
         accountTypeLabel.setFont(new Font("nunito", Font.PLAIN, 15));
@@ -121,6 +130,10 @@ public class Register extends JFrame {
         passwordLabel.setFont(new Font("nunito", Font.PLAIN, 15));
         telephoneLabel.setFont(new Font("nunito", Font.PLAIN, 15));
         emailLabel.setFont(new Font("nunito", Font.PLAIN, 15));
+        errorLabel.setFont(new Font("nunito", Font.PLAIN, 15));
+        errorLabel.setBackground(Color.WHITE);
+        errorLabel.setForeground(Color.RED);
+        errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         accountTypeField.setFont(new Font("nunito", Font.PLAIN, 15));
         usernameField.setFont(new Font("nunito", Font.PLAIN, 15));
         passwordField.setFont(new Font("nunito", Font.PLAIN, 15));
@@ -138,13 +151,37 @@ public class Register extends JFrame {
         submitButton.setBorderPainted(false);
         submitButton.addActionListener(evt -> {
                     System.out.println("Register button clicked");
-                    System.out.println(evt);
+                    String accountType = accountTypeField.getText();
+                    String username = usernameField.getText();
+                    String password = passwordField.getText();
+                    String telephone = telephoneField.getText();
+                    String email = emailField.getText();
+
+                    if (accountType.equals("") || username.equals("") || password.equals("") || telephone.equals("") || email.equals("")) {
+                        errorLabel.setText("Please fill all the fields");
+                    }
                 }
         );
         panel = new JPanel();
-        panel.setLayout(new GridLayout(11, 1,2,2));
+        panel.setLayout(new GridLayout(15, 1,2,2));
         panel.setBackground(this.bgColor);
-        // design the form with grid layout and add the components
+        // adding radio buttons to panel in a group
+        ButtonGroup group = new ButtonGroup();
+        group.add(maleRadioButton);
+        group.add(femaleRadioButton);
+        maleRadioButton.setBackground(this.bgColor);
+        femaleRadioButton.setBackground(this.bgColor);
+        maleRadioButton.setForeground(Color.WHITE);
+        femaleRadioButton.setForeground(Color.WHITE);
+        maleRadioButton.setFont(new Font("nunito", Font.PLAIN, 15));
+        femaleRadioButton.setFont(new Font("nunito", Font.PLAIN, 15));
+        maleRadioButton.setFocusPainted(false);
+        femaleRadioButton.setFocusPainted(false);
+        maleRadioButton.setBorderPainted(false);
+        femaleRadioButton.setBorderPainted(false);
+        maleRadioButton.setSelected(true);
+
+        panel.add(errorLabel);
         panel.add(usernameLabel);
         panel.add(usernameField);
         panel.add(emailLabel);
@@ -155,6 +192,9 @@ public class Register extends JFrame {
         panel.add(passwordField);
         panel.add(accountTypeLabel);
         panel.add(accountTypeField);
+        panel.add(dob);
+        panel.add(dobField);
+        panel.add(genderLabel);
         panel.add(submitButton);
     }
 
