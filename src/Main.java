@@ -13,7 +13,8 @@ import java.util.Properties;
 
 public class Main extends JFrame {
 
-    FileReader fileReader = new FileReader("C:\\Users\\dabagirevalens\\IdeaProjects\\Client_ui\\resources\\application.properties");
+    FileReader fileReader = new FileReader("C:\\Users\\hp\\IdeaProjects\\Client_ui\\resources\\application.properties");
+
     Properties properties = new Properties();
 
     public Main() throws IOException {
