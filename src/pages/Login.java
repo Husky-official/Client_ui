@@ -121,7 +121,7 @@ public class Login extends JFrame implements ActionListener {
        //email label and email text field setup
 //        emailLabel.setBounds(50, 150, 100, 30);
         Panel email=new Panel();
-        email.setLayout(new GridBagLayout());
+//        email.setLayout(new GridBagLayout());
         email.setBackground(this.bgColor);
         emailLabel.setFont(new Font("nunito", 0, 14));
         emailLabel.setForeground(this.textColor);
@@ -129,12 +129,9 @@ public class Login extends JFrame implements ActionListener {
         userEmailField.setPreferredSize(new Dimension(280, 30));
         userEmailField.setBackground(this.bgColor);
         userEmailField.setForeground(Color.BLACK);
-        email.add(emailLabel);
-        email.add(userEmailField);
-        //password label and password text field setup
-//        passwordLabel.setBounds(50, 220, 100, 30);
+//      passwordLabel.setBounds(50, 220, 100, 30);
         Panel password=new Panel();
-        password.setLayout(new GridBagLayout());
+//        password.setLayout(new GridBagLayout());
         password.setBackground(this.bgColor);
         passwordLabel.setFont(new Font("nunito", 0, 14));
         passwordLabel.setForeground(this.textColor);
@@ -142,9 +139,7 @@ public class Login extends JFrame implements ActionListener {
         passwordField.setPreferredSize(new Dimension(280, 30));
         passwordField.setBackground(this.bgColor);
         passwordField.setForeground(Color.BLACK);
-        password.add(passwordLabel);
-        password.add(passwordField);
-          //show password checkbox setup
+        //show password checkbox setup
         showPassword.setBackground(this.bgColor);
         showPassword.setForeground(this.textColor);
         showPassword.setFont(new Font("nunito", 0, 14));
@@ -166,11 +161,14 @@ public class Login extends JFrame implements ActionListener {
         resetButton.setFocusPainted(false);
         resetButton.setBorderPainted(false);
         //panel 2 setup
-        JPanel panel2 = new JPanel(new GridBagLayout());
-        panel2.setBorder(BorderFactory.createEmptyBorder(10, 0, 25, 0));
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(new GridLayout(8,1,2,2));
+//        panel2.setBorder(BorderFactory.createEmptyBorder(10, 0, 25, 0));
         panel2.setBackground(this.bgColor);
-        panel2.add(email);
-        panel2.add(password);
+        panel2.add(emailLabel);
+        panel2.add(userEmailField);
+        panel2.add(passwordLabel);
+        panel2.add(passwordField);
         panel2.add(showPassword);
         panel2.add(login);
         panel2.add(resetButton);
