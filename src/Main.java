@@ -18,8 +18,9 @@ public class Main extends JFrame {
 
     public Main() throws IOException {
 
-        properties.load(fileReader);
-        boolean logged_in = Boolean.parseBoolean(properties.getProperty("logged_in"));
+//        properties.load(fileReader);
+//        boolean logged_in = Boolean.parseBoolean(properties.getProperty("logged_in"));
+        boolean logged_in = false;
         System.out.println(logged_in);
 
         //change layout if user logged in

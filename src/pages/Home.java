@@ -1,6 +1,15 @@
 package src.pages;
 
 import src.components.shared.Button;
+import src.pages.messaging.Messages;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import java.awt.*;
 import java.util.Objects;
@@ -67,6 +76,12 @@ public class Home extends JFrame {
         this.registerButton.addActionListener(e -> {
             Register register = new Register();
             register.setVisible(true);
+            this.dispose();
+        });
+
+        this.registerButton.addActionListener(e -> {
+            Messages messaging = new Messages();
+            messaging.setVisible(true);
             this.dispose();
         });
 
