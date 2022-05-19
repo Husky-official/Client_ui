@@ -1,6 +1,7 @@
 package src.pages.layout;
 
 import src.pages.dashboard.DashboardPage;
+import src.pages.interviewing.InterviewingPage;
 import src.pages.profile.ProfilePage;
 
 import javax.swing.*;
@@ -158,9 +159,22 @@ public class SideBar extends JPanel {
         interviewingPanel.add(interviewing);
         interviewingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                System.out.println("Interviewing");
+                InterviewingPage interviewingPage = new InterviewingPage();
+                interviewingPage.setVisible(true);
+                Frame[] frames = Frame.getFrames();
+
+                for (Frame fr : frames) {
+                    String specificFrameName = fr.getClass().getName();
+                    if (!specificFrameName.equals("src.pages.interviewing.InterviewingPage")) {
+                        if (fr.getSize().width > 600) {
+                            interviewingPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        }
+                        fr.dispose();
+                    }
+                }
             }
         });
+
 
         //settings
         ImageIcon settings_icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/src/img/settings-black.png")));
