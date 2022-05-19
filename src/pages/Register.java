@@ -1,5 +1,7 @@
 package src.pages;
 
+import src.utils.IconTextField;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
@@ -53,7 +55,7 @@ public class Register extends JFrame {
         registerButton.setFocusPainted(false);
         registerButton.setBorderPainted(false);
         loginButton.setBackground(this.bgColor);
-        loginButton.setFont(new Font("nunito", 0, 17));
+        loginButton.setFont(new Font("nunito", Font.PLAIN, 17));
         loginButton.setForeground(this.textColor);
         loginButton.setBorder(null);
         loginButton.setFocusPainted(false);
@@ -108,12 +110,24 @@ public class Register extends JFrame {
         JLabel passwordLabel = new JLabel("Password:");
         JLabel telephoneLabel = new JLabel("Telephone:");
         JLabel emailLabel = new JLabel("Email:");
-        JTextField accountTypeField = new JTextField();
-        JTextField usernameField = new JTextField();
-        JTextField passwordField = new JTextField();
-        JTextField telephoneField = new JTextField();
-        JTextField emailField = new JTextField();
+        IconTextField accountTypeField = new IconTextField();
+        IconTextField usernameField = new IconTextField();
+        IconTextField passwordField = new IconTextField();
+        IconTextField telephoneField = new IconTextField();
+        IconTextField emailField = new IconTextField();
         JButton submitButton = new JButton("Register");
+        accountTypeLabel.setFont(new Font("nunito", Font.PLAIN, 15));
+        usernameLabel.setFont(new Font("nunito", Font.PLAIN, 15));
+        passwordLabel.setFont(new Font("nunito", Font.PLAIN, 15));
+        telephoneLabel.setFont(new Font("nunito", Font.PLAIN, 15));
+        emailLabel.setFont(new Font("nunito", Font.PLAIN, 15));
+        accountTypeField.setFont(new Font("nunito", Font.PLAIN, 15));
+        usernameField.setFont(new Font("nunito", Font.PLAIN, 15));
+        passwordField.setFont(new Font("nunito", Font.PLAIN, 15));
+        telephoneField.setFont(new Font("nunito", Font.PLAIN, 15));
+        emailField.setFont(new Font("nunito", Font.PLAIN, 15));
+        submitButton.setFont(new Font("nunito", Font.PLAIN, 15));
+
         submitButton.setBackground(this.textColor);
         submitButton.setForeground(Color.WHITE);
         submitButton.setFocusPainted(false);
@@ -127,7 +141,6 @@ public class Register extends JFrame {
                     System.out.println(evt);
                 }
         );
-
         panel = new JPanel();
         panel.setLayout(new GridLayout(11, 1,2,2));
         panel.setBackground(this.bgColor);

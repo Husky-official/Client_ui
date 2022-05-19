@@ -4,13 +4,12 @@
  */
 package src.utils.registration;
 
-import clientconnector.ClientServerConnector;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import src.client.ClientServerConnector;
 
 import java.io.IOException;
 
-import static utils.MessagePrinter.ResponsePrinter;
 
 /** The type Handlers. */
 public class Handlers {
@@ -23,7 +22,7 @@ public class Handlers {
    */
   public static void RequestHandler(String requestString) throws IOException {
         ClientServerConnector clientServerConnector = new ClientServerConnector();
-        String response = clientServerConnector.connectToServer(requestString);
+        String response = clientServerConnector.connect(requestString);
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonResponse = objectMapper.readTree(response);
@@ -31,6 +30,6 @@ public class Handlers {
         int status = jsonResponse.get("status").asInt();
         String message = jsonResponse.get("message").asText();
         String actionDone = jsonResponse.get("actionToDo").asText();
-        ResponsePrinter(status,message,actionDone);
+        System.out.println(actionDone+" " + message+ " "+ status);
     }
 }
