@@ -7,6 +7,8 @@ import java.util.Objects;
 public class Register extends JFrame {
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
+    JButton registerButton;
+    JButton loginButton;
 
     private JPanel panel;
 
@@ -20,6 +22,7 @@ public class Register extends JFrame {
         initUI();
     }
 
+
     public void initUI() {
         setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/src/img/logo.png"))).getImage());
 
@@ -27,8 +30,8 @@ public class Register extends JFrame {
         JPanel headPanel = new JPanel(new BorderLayout());
         JPanel bodyPanel = new JPanel(new GridBagLayout());
 
-        JButton registerButton = new JButton("Register");
-        JButton loginButton = new JButton("Login");
+        registerButton = new JButton("Register");
+        loginButton = new JButton("Login");
 
         headPanel.setPreferredSize(new Dimension(0, 80));
         headPanel.setBackground(this.bgColor);
@@ -110,16 +113,24 @@ public class Register extends JFrame {
         JTextField passwordField = new JTextField();
         JTextField telephoneField = new JTextField();
         JTextField emailField = new JTextField();
-        JButton registerButton = new JButton("Register");
+        JButton submitButton = new JButton("Register");
+        submitButton.setBackground(this.textColor);
+        submitButton.setForeground(Color.WHITE);
+        submitButton.setFocusPainted(false);
+        submitButton.setFont(new Font("nunito", Font.PLAIN, 15));
+        // adding padding to subimt button
 
-        registerButton.addActionListener(evt -> {
+        submitButton.setFocusPainted(false);
+        submitButton.setBorderPainted(false);
+        submitButton.addActionListener(evt -> {
                     System.out.println("Register button clicked");
                     System.out.println(evt);
                 }
         );
 
         panel = new JPanel();
-        panel.setLayout(new GridLayout(7, 2));
+        panel.setLayout(new GridLayout(11, 1,2,2));
+        panel.setBackground(this.bgColor);
         // design the form with grid layout and add the components
         panel.add(usernameLabel);
         panel.add(usernameField);
@@ -131,7 +142,7 @@ public class Register extends JFrame {
         panel.add(passwordField);
         panel.add(accountTypeLabel);
         panel.add(accountTypeField);
-        panel.add(registerButton);
+        panel.add(submitButton);
     }
 
 }
