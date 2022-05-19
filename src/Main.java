@@ -23,7 +23,8 @@ public class Main extends JFrame {
         properties.load(fileReader);
         boolean logged_in = Boolean.parseBoolean(properties.getProperty("logged_in"));
         System.out.println(logged_in);
-//        change layout if user logged in
+
+        //change layout if user logged in
         if (logged_in){
             this.add(new DashboardPage());
         }else {
