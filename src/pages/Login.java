@@ -130,5 +130,4 @@ public class Login extends JFrame {
         contentPanel.add(bodyPanel, "Center");
         this.add(contentPanel);
     }
-
 }

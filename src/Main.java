@@ -2,7 +2,8 @@ package src;
 
 
 import src.pages.Home;
-import src.pages.layout.Layout;
+import src.pages.dashboard.Dashboard;
+import src.pages.dashboard.DashboardPage;
 
 import javax.swing.*;
 import java.io.FileReader;
@@ -23,7 +24,7 @@ public class Main extends JFrame {
 
         //change layout if user logged in
         if (logged_in){
-            this.add(new Layout());
+            this.add(new DashboardPage());
         }else {
             this.add(new Home());
         }
