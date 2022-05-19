@@ -1,5 +1,7 @@
 package src.pages;
 
+import src.components.sidebar.MenuItem;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -19,11 +21,8 @@ public class Sidebar extends JFrame {
 
     private Color bgColor = Color.WHITE;
     Color sidebarColor = new Color(24, 28, 46);
-    Font f1 = new Font("Nunito", Font.PLAIN,18);
-    public Font setCustomFontSize(int size){
-        f1= new Font("Nunito", Font.PLAIN,size);
-        return f1;
-    }
+
+
 
     public Sidebar() throws IOException, FontFormatException {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -31,7 +30,6 @@ public class Sidebar extends JFrame {
         setLocationRelativeTo(null);
         this.setVisible(true);
         this.setLayout(null);
-        this.setFont(f1);
 
         JPanel sidebar = new JPanel();
         sidebar.setBounds(0,0,280,1000);
@@ -41,74 +39,35 @@ public class Sidebar extends JFrame {
         JLabel logo = new JLabel("HIRIC",JLabel.CENTER);
         logo.setBounds(0,18,280,70);
         logo.setForeground(Color.white);
-        logo.setFont(f1);
         sidebar.add(logo);
 
 
-        JPanel dashboardP = new JPanel();
-        dashboardP.setBounds(0,100,380,60);
-        JLabel dashboard = new JLabel("Dashboard",JLabel.CENTER);
-        dashboard.setBounds(0,0,280,60);
-        dashboard.setForeground(Color.WHITE);
-        dashboard.setFont(setCustomFontSize(16));
-        dashboardP.setBackground(null);
-        dashboardP.setLayout(null);
-        dashboardP.add(dashboard);
+        JPanel dashboardP = new MenuItem(0,100,380,55, "Dashboard");
         sidebar.add(dashboardP);
-
-
 //        Event listener
-        dashboard.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                dashboardP.setBackground(Color.BLUE);
-            }
-        });
-
-        JLabel settings = new JLabel("Settings");
-        settings.setBounds(0,160,200,60);
-        settings.setForeground(Color.white);
-        settings.setFont(setCustomFontSize(16));
+//        dashboard.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                dashboardP.setBackground(Color.BLUE);
+//            }
+//        });
+//
+        JPanel settings = new MenuItem(0,160,380,55, "Settings");
         sidebar.add(settings);
-
-        JLabel hiring= new JLabel("Hiring");
-        hiring.setBounds(40,220,200,60);
-        hiring.setForeground(Color.white);
-        hiring.setFont(setCustomFontSize(16));
-
-        JLabel module= new JLabel("NewModule");
-        module.setBounds(40,280,200,60);
-        module.setForeground(Color.white);
-        module.setFont(setCustomFontSize(16));
-
-
-        JLabel messaging= new JLabel("messaging");
-        messaging.setBounds(40,340,200,60);
-        messaging.setForeground(Color.white);
-        messaging.setFont(setCustomFontSize(16));
-
-
-        JLabel invoice= new JLabel("Invoice");
-        invoice.setBounds(40,300,200,50);
-        invoice.setForeground(Color.white);
-        invoice.setFont(setCustomFontSize(16));
-
-
-        JLabel posts= new JLabel("Posts");
-        posts.setBounds(40,360,200,50);
-        posts.setForeground(Color.white);
-        posts.setFont(setCustomFontSize(16));
-
-
-
-
-
-
-        sidebar.add(hiring);
+        JPanel module = new MenuItem(0,220,380,55, "NewModule");
         sidebar.add(module);
-        sidebar.add(messaging);
-        sidebar.add(invoice);
-        sidebar.add(posts);
+    JPanel messaging = new MenuItem(0,280,380,55,"Messaging");
+    sidebar.add(messaging);
+
+JPanel  invoice = new MenuItem(0,340,380,55,"Invoice");
+sidebar.add(invoice);
+
+JPanel posts = new MenuItem(0,400,380,55,"Posts");
+sidebar.add(posts);
+
+        JPanel interviewing = new MenuItem(0,460,380,55,"Interviewing");
+        sidebar.add(interviewing);
+
         this.add(sidebar);
 
 
