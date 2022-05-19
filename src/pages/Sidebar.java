@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-
+import java.util.Objects;
 
 
 public class Sidebar extends JFrame {
@@ -42,16 +42,14 @@ public class Sidebar extends JFrame {
         sidebar.add(logo);
 
 
-        JPanel dashboardP = new MenuItem(0,100,380,55, "Dashboard");
-        sidebar.add(dashboardP);
-//        Event listener
-//        dashboard.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                dashboardP.setBackground(Color.BLUE);
-//            }
-//        });
 //
+//        JPanel icon = new JPanel();
+//        ImageIcon dashIconImage = new ImageIcon(Objects.requireNonNull(getClass().getResource("/src/img/recent.png")));
+//        JLabel dashIcon = new JLabel(dashIconImage);
+//        sidebar.add(dashIcon);
+
+        JPanel dashboardP = new MenuItem(0,100,380,65, "Dashboard");
+        sidebar.add(dashboardP);
         JPanel settings = new MenuItem(0,160,380,55, "Settings");
         sidebar.add(settings);
         JPanel module = new MenuItem(0,220,380,55, "NewModule");
