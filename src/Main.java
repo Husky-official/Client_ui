@@ -12,7 +12,9 @@ import java.util.Properties;
 
 public class Main extends JFrame {
 
-    FileReader fileReader = new FileReader("C:\\Users\\dabagirevalens\\IdeaProjects\\Client_ui\\resources\\application.properties");
+  FileReader fileReader =
+      new FileReader(
+          "C:\\Users\\uwena\\IdeaProjects\\Husky\\Client_ui\\resources\\application.properties");
     Properties properties = new Properties();
 
     public Main() throws IOException {
@@ -20,8 +22,7 @@ public class Main extends JFrame {
         properties.load(fileReader);
         boolean logged_in = Boolean.parseBoolean(properties.getProperty("logged_in"));
         System.out.println(logged_in);
-
-        //change layout if user logged in
+//        change layout if user logged in
         if (logged_in){
             this.add(new Layout());
         }else {
