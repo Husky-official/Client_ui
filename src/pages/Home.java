@@ -36,7 +36,7 @@ public class Home extends JFrame {
         JPanel headPanel = new JPanel(new BorderLayout());
         JPanel bodyPanel = new JPanel(new GridBagLayout());
 
-        this.registerButton = new Button("Register", Color.WHITE, textColor, new Font("nunito", Font.PLAIN, 15) , 5);
+        this.registerButton = new Button("Register", Color.WHITE, textColor, new Font("nunito", Font.PLAIN, 15) , 0);
         this.loginButton = new JButton("Login");
 
         JLabel appBrand = new JLabel("Hiric");
