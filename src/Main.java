@@ -1,48 +1,110 @@
 package src;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import src.client.ClientServerConnector;
-import src.models.RequestBody;
-import src.pages.Home;
+
+import src.utils.IconTextField;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 
 public class Main extends JFrame {
 
-    private JLabel label;
+    private final Color textColor = Color.decode("#283A6D");
+    private final Color bgColor = Color.decode("#F2F6FF");
+    private JButton registerButton;
+    private JButton loginButton;
+    private JTextField searchInput;
+    IconTextField searchField = new IconTextField();     // search field
 
-    public Main() throws Exception {
-        Welcome();
+    public Main() {
+        this.setTitle("Home | Hiric");
+        this.setSize(1000, 600);
+        this.initUI();
+        this.setLocationRelativeTo((Component)null);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
-    public void Welcome() throws Exception{
+    public void initUI() {
 
-        setTitle("HIRIC");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
-        setIconImage(new ImageIcon("src/img/dv.png").getImage());
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        JPanel headPanel = new JPanel(new BorderLayout());
+        JPanel bodyPanel = new JPanel(new GridBagLayout());
 
-        label = new JLabel();
-        add(label);
+        this.registerButton = new JButton("Register");
+        this.loginButton = new JButton("Login");
+        this.searchInput = new JTextField("Search whatever you want");
 
-        RequestBody requestBody = new RequestBody();
-        requestBody.setUrl("/welcome");
-        requestBody.setAction("welcome");
-        requestBody.setObject(null);
+        JLabel appBrand = new JLabel("Hiric");
+        JLabel welcomeText = new JLabel("Welcome to Hiric");
+        JLabel instructionText = new JLabel("It's time to get your work done!!");
 
-        String request = new ObjectMapper().writeValueAsString(requestBody);
+        ImageIcon icon = new ImageIcon("search-icon.png");
+        this.searchField.setIcon(icon);
+        this.searchField.setFont(new Font("Verdana", 0, 16));
 
-        ClientServerConnector clientServerConnector = new ClientServerConnector();
-        String response = clientServerConnector.connect(request);
+        appBrand.setFont(new Font("nunito", 1, 25));
+        appBrand.setForeground(this.textColor);
+        headPanel.setPreferredSize(new Dimension(0, 80));
+        headPanel.setBackground(this.bgColor);
+        bodyPanel.setBackground(this.bgColor);
+        JPanel headRightPanel = new JPanel(new GridLayout(1, 2, 15, 0));
+        JPanel headLeftPanel = new JPanel(new GridLayout(1, 1, 10, 3));
+        headRightPanel.setBackground(this.bgColor);
+        headLeftPanel.setBackground(this.bgColor);
+        headRightPanel.add(this.registerButton);
+        headRightPanel.add(this.loginButton);
+        headLeftPanel.add(appBrand);
+        headRightPanel.setBorder(BorderFactory.createEmptyBorder(20, 5, 20, 50));
+        headLeftPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 5));
+        this.registerButton.setBackground(this.textColor);
+        this.registerButton.setForeground(Color.WHITE);
+        this.registerButton.setFocusPainted(false);
+        this.registerButton.setFont(new Font("nunito", 0, 15));
+        this.registerButton.setFocusPainted(false);
+        this.registerButton.setBorderPainted(false);
+        this.loginButton.setBackground(this.bgColor);
+        this.loginButton.setFont(new Font("nunito", 0, 17));
+        this.loginButton.setForeground(this.textColor);
+        this.loginButton.setBorder((Border)null);
+        this.loginButton.setFocusPainted(false);
 
-        label.setText(response);
+        JPanel bodyContent = new JPanel();
+        BoxLayout boxLayout = new BoxLayout(bodyContent, 1);
 
+        welcomeText.setFont(new Font("nunito", 1, 30));
+        welcomeText.setForeground(this.textColor);
+        instructionText.setForeground(Color.GRAY);
+        instructionText.setFont(new Font("nunito", 0, 15));
 
-        Home home = new Home();
-        add(home);
+        this.searchField.setPreferredSize(new Dimension(400, 50));
+
+        JPanel panel1 = new JPanel(new GridBagLayout());
+        panel1.setBorder(BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        panel1.add(welcomeText);
+        panel1.setBackground(this.bgColor);
+        bodyContent.add(panel1);
+
+        JPanel panel2 = new JPanel(new GridBagLayout());
+        panel2.setBorder(BorderFactory.createEmptyBorder(0, 0, 25, 0));
+        panel2.add(instructionText);
+        panel2.setBackground(this.bgColor);
+        bodyContent.add(panel2);
+
+        this.searchField.setBackground(this.bgColor);
+        this.searchField.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1, true));
+        this.searchField.setForeground(Color.BLACK);
+
+        bodyContent.add((new JPanel(new GridBagLayout())).add(this.searchField));
+        bodyContent.setLayout(boxLayout);
+        bodyContent.setBackground(this.bgColor);
+        bodyPanel.setBackground(this.bgColor);
+        bodyPanel.add(bodyContent);
+        headPanel.add(headLeftPanel, "West");
+        headPanel.add(headRightPanel, "East");
+        contentPanel.add(headPanel, "North");
+        contentPanel.add(bodyPanel, "Center");
+        this.add(contentPanel);
     }
 
     public static void main(String[] args) throws Exception {
