@@ -1,15 +1,33 @@
 package src.pages;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import src.client.ClientServerConnector;
+import src.models.RequestBody;
+import src.models.User;
+import src.utils.IconTextField;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Objects;
 
-public class Login extends JFrame {
+public class Login extends JFrame implements ActionListener {
 
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
     private JButton registerButton;
     private JButton loginButton;
+
+    JLabel emailLabel = new JLabel("Email : ");
+    JLabel passwordLabel = new JLabel("Password : ");
+    IconTextField userEmailField = new IconTextField();
+    JPasswordField passwordField = new JPasswordField();
+    JButton login = new JButton("Login");
+    JButton resetButton = new JButton("Reset");
+    JCheckBox showPassword = new JCheckBox("Show Password");
 
 
     public Login() {
@@ -19,6 +37,7 @@ public class Login extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.initUI();
+        this.addActionEvent();
     }
 
     public void initUI() {
@@ -90,7 +109,7 @@ public class Login extends JFrame {
 
 
         JPanel panel1 = new JPanel(new GridBagLayout());
-        panel1.setBorder(BorderFactory.createEmptyBorder(80, 0, 3, 0));
+        panel1.setBorder(BorderFactory.createEmptyBorder(50, 0, 30, 0));
         panel1.add(welcomeText);
         panel1.setBackground(this.bgColor);
         bodyContent.add(panel1);
@@ -99,15 +118,62 @@ public class Login extends JFrame {
          * Add login form
          * */
 
-
-
-        JPanel panel2 = new JPanel(new GridBagLayout());
-        panel2.setBorder(BorderFactory.createEmptyBorder(0, 0, 25, 0));
+       //email label and email text field setup
+//        emailLabel.setBounds(50, 150, 100, 30);
+        Panel email=new Panel();
+//        email.setLayout(new GridBagLayout());
+        email.setBackground(this.bgColor);
+        emailLabel.setFont(new Font("nunito", 0, 14));
+        emailLabel.setForeground(this.textColor);
+        userEmailField.setFont(new Font("Verdana", 0, 14));
+        userEmailField.setPreferredSize(new Dimension(280, 30));
+        userEmailField.setBackground(this.bgColor);
+        userEmailField.setForeground(Color.BLACK);
+//      passwordLabel.setBounds(50, 220, 100, 30);
+        Panel password=new Panel();
+//        password.setLayout(new GridBagLayout());
+        password.setBackground(this.bgColor);
+        passwordLabel.setFont(new Font("nunito", 0, 14));
+        passwordLabel.setForeground(this.textColor);
+        passwordField.setFont(new Font("Verdana", 0, 14));
+        passwordField.setPreferredSize(new Dimension(280, 30));
+        passwordField.setBackground(this.bgColor);
+        passwordField.setForeground(Color.BLACK);
+        //show password checkbox setup
+        showPassword.setBackground(this.bgColor);
+        showPassword.setForeground(this.textColor);
+        showPassword.setFont(new Font("nunito", 0, 14));
+        showPassword.setFocusPainted(false);
+        showPassword.setBorderPainted(false);
+        showPassword.setOpaque(false);
+        showPassword.setSelected(false);
+        showPassword.setBorder(null);
+        showPassword.setFocusPainted(false);
+        //login button setup
+        login.setBackground(this.textColor);
+        login.setForeground(Color.WHITE);
+        login.setFocusPainted(false);
+        login.setFont(new Font("nunito",Font.PLAIN,14));
+        //reset button setup
+        resetButton.setBackground(this.textColor);
+        resetButton.setForeground(Color.RED);
+        resetButton.setFont(new Font("nunito", Font.PLAIN, 14));
+        resetButton.setFocusPainted(false);
+        resetButton.setBorderPainted(false);
+        //panel 2 setup
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(new GridLayout(8,1,2,2));
+//        panel2.setBorder(BorderFactory.createEmptyBorder(10, 0, 25, 0));
         panel2.setBackground(this.bgColor);
+        panel2.add(emailLabel);
+        panel2.add(userEmailField);
+        panel2.add(passwordLabel);
+        panel2.add(passwordField);
+        panel2.add(showPassword);
+        panel2.add(login);
+        panel2.add(resetButton);
         bodyContent.add(panel2);
-
         // end of login form
-
         JLabel copyright = new JLabel("Copyright 2022 @husky | All Right Reserved.");
         copyright.setFont(new Font("nunito", Font.ITALIC, 15));
         copyright.setForeground(Color.GRAY);
@@ -129,5 +195,63 @@ public class Login extends JFrame {
         contentPanel.add(headPanel, "North");
         contentPanel.add(bodyPanel, "Center");
         this.add(contentPanel);
+    }
+    public void addActionEvent() {
+        login.addActionListener(this);
+        resetButton.addActionListener(this);
+        showPassword.addActionListener(this);
+    }
+    //listening to action
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == resetButton) {
+            userEmailField.setText("");
+            passwordField.setText("");
+        }
+        if(e.getSource()==showPassword){
+            if(showPassword.isSelected()){
+                passwordField.setEchoChar((char)0);
+            }else{
+                passwordField.setEchoChar('*');
+            }
+        }
+        if (e.getSource()==login){
+            String emailEntered= userEmailField.getText();
+            String passwordEntered= passwordField.getText();
+            if(emailEntered.equals("")||passwordEntered.equals("")){
+                JOptionPane.showMessageDialog(null,"Please fill all the fields","Error",JOptionPane.ERROR_MESSAGE);
+            }
+            //sending request to the server
+            try {
+                User user =new User();
+                user.setEmail(emailEntered);
+                user.setPassword(passwordEntered);
+                RequestBody requestBody=new RequestBody();
+                requestBody.setUrl("/users");
+                requestBody.setAction("login");
+                requestBody.setObject(user);
+                String requestString = new ObjectMapper().writeValueAsString(requestBody);
+                ClientServerConnector clientServerConnector=new ClientServerConnector();
+                //sending request to the server
+                String response=clientServerConnector.connect(requestString);
+                //getting response
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonResponse = objectMapper.readTree(response);
+                int status = jsonResponse.get("status").asInt();
+                String message = jsonResponse.get("message").asText();
+                String actionDone = jsonResponse.get("actionToDo").asText();
+                if(Objects.equals(message, "You are already logged in.") || Objects.equals(message,"User logged in successfully")){
+                    JOptionPane.showMessageDialog(null,"Login Successful");
+                    new Home().setVisible(true);
+                    this.dispose();
+                    return;
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Invalid email or password");
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            }
     }
 }
