@@ -1,6 +1,7 @@
 package src.pages;
 
 import src.components.shared.Button;
+import src.pages.Messaging.Messaging;
 import src.utils.IconTextField;
 
 import java.awt.BorderLayout;
@@ -74,6 +75,12 @@ public class Home extends JFrame {
         this.loginButton.addActionListener(e -> {
             Login login = new Login();
             login.setVisible(true);
+            this.dispose();
+        });
+
+        this.registerButton.addActionListener(e -> {
+            Messaging messaging = new Messaging();
+            messaging.setVisible(true);
             this.dispose();
         });
 
