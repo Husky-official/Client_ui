@@ -1,8 +1,7 @@
 package src.pages;
 
 import src.components.shared.Button;
-import src.pages.Messaging.Messaging;
-import src.utils.IconTextField;
+import src.pages.messaging.Messages;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,6 +10,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+
+import java.awt.*;
 import java.util.Objects;
 import javax.swing.*;
 
@@ -20,7 +21,6 @@ public class Home extends JFrame {
     private final Color bgColor = Color.decode("#F2F6FF");
     private JButton registerButton;
     private JButton loginButton;
-    IconTextField searchField = new IconTextField();     // search field
 
     public Home() {
         this.setTitle("Hiric");
@@ -39,16 +39,12 @@ public class Home extends JFrame {
         JPanel headPanel = new JPanel(new BorderLayout());
         JPanel bodyPanel = new JPanel(new GridBagLayout());
 
-        this.registerButton = new Button("Register", Color.WHITE, textColor, new Font("nunito", Font.PLAIN, 15) , 5);
+        this.registerButton = new Button("Register", Color.WHITE, textColor, new Font("nunito", Font.PLAIN, 15) , 0);
         this.loginButton = new JButton("Login");
 
         JLabel appBrand = new JLabel("Hiric");
         JLabel welcomeText = new JLabel("Welcome to Hiric");
         JLabel instructionText = new JLabel("It's time to get your work done!!");
-
-        ImageIcon icon = new ImageIcon("src/img/search-icon.png");
-        this.searchField.setIcon(icon);
-        this.searchField.setFont(new Font("Verdana", Font.PLAIN, 16));
 
         appBrand.setFont(new Font("nunito", Font.BOLD, 25));
         appBrand.setForeground(this.textColor);
@@ -77,9 +73,14 @@ public class Home extends JFrame {
             login.setVisible(true);
             this.dispose();
         });
+        this.registerButton.addActionListener(e -> {
+            Register register = new Register();
+            register.setVisible(true);
+            this.dispose();
+        });
 
         this.registerButton.addActionListener(e -> {
-            Messaging messaging = new Messaging();
+            Messages messaging = new Messages();
             messaging.setVisible(true);
             this.dispose();
         });
@@ -92,14 +93,8 @@ public class Home extends JFrame {
         instructionText.setForeground(Color.GRAY);
         instructionText.setFont(new Font("nunito", 0, 15));
 
-        this.searchField.setPreferredSize(new Dimension(400, 50));
-        this.searchField.setBackground(this.bgColor);
-        this.searchField.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1, true));
-        this.searchField.setForeground(Color.BLACK);
-//        bodyContent.add((new JPanel(new GridBagLayout())).add(this.searchField));
-
         JPanel panel1 = new JPanel(new GridBagLayout());
-        panel1.setBorder(BorderFactory.createEmptyBorder(80, 0, 3, 0));
+        panel1.setBorder(BorderFactory.createEmptyBorder(60, 0, 3, 0));
         panel1.add(welcomeText);
         panel1.setBackground(this.bgColor);
         bodyContent.add(panel1);
@@ -110,13 +105,21 @@ public class Home extends JFrame {
         panel2.setBackground(this.bgColor);
         bodyContent.add(panel2);
 
+        JPanel hiricImage = new JPanel(new GridBagLayout());
+        hiricImage.setBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0));
+        ImageIcon image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/src/img/logo-2.png")));
+        Image img = image.getImage().getScaledInstance(220, 220, Image.SCALE_SMOOTH);
+        hiricImage.add(new JLabel(new ImageIcon(img)));
+        hiricImage.setBackground(this.bgColor);
+        bodyContent.add(hiricImage);
+
         JLabel copyright = new JLabel("Copyright 2022 @husky | All Right Reserved.");
         copyright.setFont(new Font("nunito", Font.ITALIC, 15));
         copyright.setForeground(Color.GRAY);
 
         JPanel footer = new JPanel(new GridBagLayout());
         if(this.getSize().height == 600){
-            footer.setBorder(BorderFactory.createEmptyBorder(235, 0, 0, 0));
+            footer.setBorder(BorderFactory.createEmptyBorder(60, 0, 0, 0));
         }
         footer.add(copyright);
         footer.setBackground(this.bgColor);

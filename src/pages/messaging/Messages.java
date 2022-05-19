@@ -1,22 +1,19 @@
-package src.pages.Messaging;
+package src.pages.messaging;
 
 import src.components.shared.Button;
 import src.pages.Login;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.ColorModel;
 import java.util.Objects;
 
-public class Messaging extends JFrame {
+public class Messages extends JFrame {
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
     private final Color memberSideColor = Color.decode("#FFFFFF");
     private JButton goBack;
 
-    public Messaging() {
+    public Messages() {
         this.setTitle("Messaging | Hiric");
         this.setSize(1300, 830);
         this.setLocationRelativeTo((Component) null);
