@@ -30,6 +30,11 @@ public class Validations {
         if(!email.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")) return "Email is not valid, must be in format: example.domain.extension";
         return "OK";
     }
+
+    public static String isPhoneNumberValid(String phoneNumber) {
+      if(!phoneNumber.matches("^07\\d{8}$")) return "Phone number is not valid, must be in format: 0782345678";
+    return "OK";
+    }
   /**
    * Is password valid string.
    *
@@ -37,7 +42,8 @@ public class Validations {
    * @return the string
    */
   public static String isPasswordValid(String password) {
-      if(!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$")) return "Password is not valid, must be at least 8 characters long, contain at least one upper case letter, one lower case letter, one number and one special character";
+      // password must be at least 6 characters long
+      if(password.length() < 6) return "Password is not valid, must be at least 6 characters long";
         return "OK";
     }
 
