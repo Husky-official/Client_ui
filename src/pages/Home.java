@@ -2,13 +2,7 @@ package src.pages;
 
 import src.components.shared.Button;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.util.Objects;
 import javax.swing.*;
 
@@ -85,7 +79,7 @@ public class Home extends JFrame {
         instructionText.setFont(new Font("nunito", 0, 15));
 
         JPanel panel1 = new JPanel(new GridBagLayout());
-        panel1.setBorder(BorderFactory.createEmptyBorder(80, 0, 3, 0));
+        panel1.setBorder(BorderFactory.createEmptyBorder(60, 0, 3, 0));
         panel1.add(welcomeText);
         panel1.setBackground(this.bgColor);
         bodyContent.add(panel1);
@@ -96,13 +90,21 @@ public class Home extends JFrame {
         panel2.setBackground(this.bgColor);
         bodyContent.add(panel2);
 
+        JPanel hiricImage = new JPanel(new GridBagLayout());
+        hiricImage.setBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0));
+        ImageIcon image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/src/img/logo-2.png")));
+        Image img = image.getImage().getScaledInstance(220, 220, Image.SCALE_SMOOTH);
+        hiricImage.add(new JLabel(new ImageIcon(img)));
+        hiricImage.setBackground(this.bgColor);
+        bodyContent.add(hiricImage);
+
         JLabel copyright = new JLabel("Copyright 2022 @husky | All Right Reserved.");
         copyright.setFont(new Font("nunito", Font.ITALIC, 15));
         copyright.setForeground(Color.GRAY);
 
         JPanel footer = new JPanel(new GridBagLayout());
         if(this.getSize().height == 600){
-            footer.setBorder(BorderFactory.createEmptyBorder(235, 0, 0, 0));
+            footer.setBorder(BorderFactory.createEmptyBorder(60, 0, 0, 0));
         }
         footer.add(copyright);
         footer.setBackground(this.bgColor);
