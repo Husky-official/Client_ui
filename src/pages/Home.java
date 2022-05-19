@@ -1,5 +1,7 @@
 package src.pages;
 
+import src.components.shared.Button;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -34,7 +36,7 @@ public class Home extends JFrame {
         JPanel headPanel = new JPanel(new BorderLayout());
         JPanel bodyPanel = new JPanel(new GridBagLayout());
 
-        this.registerButton = new JButton("Register");
+        this.registerButton = new Button("Register", Color.WHITE, textColor, new Font("nunito", Font.PLAIN, 15) , 5);
         this.loginButton = new JButton("Login");
 
         JLabel appBrand = new JLabel("Hiric");
@@ -56,13 +58,6 @@ public class Home extends JFrame {
         headRightPanel.setBorder(BorderFactory.createEmptyBorder(20, 5, 20, 50));
         headLeftPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 5));
 
-        this.registerButton.setBackground(this.textColor);
-        this.registerButton.setForeground(Color.WHITE);
-        this.registerButton.setFocusPainted(false);
-        this.registerButton.setFont(new Font("nunito", Font.PLAIN, 15));
-//        this.registerButton.setBorder(new RoundedBorder(40));
-        this.registerButton.setFocusPainted(false);
-        this.registerButton.setBorderPainted(false);
         this.loginButton.setBackground(this.bgColor);
         this.loginButton.setFont(new Font("nunito", 0, 17));
         this.loginButton.setForeground(this.textColor);
