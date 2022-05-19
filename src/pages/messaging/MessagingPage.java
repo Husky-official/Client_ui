@@ -1,17 +1,17 @@
-package src.pages.dashboard;
+package src.pages.messaging;
 
+import src.pages.dashboard.Dashboard;
 import src.pages.layout.SideBar;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class DashboardPage extends JFrame {
-
+public class MessagingPage extends JFrame {
     private JPanel contentPanel;
     private JPanel bodyPanel;
 
-    public DashboardPage() {
+    public MessagingPage() {
         this.setTitle("Dashboard | Hiric");
         this.setSize(1000, 600);
         this.initUI();
@@ -26,7 +26,7 @@ public class DashboardPage extends JFrame {
         bodyPanel = new JPanel(new GridBagLayout());
 
         bodyPanel.setBackground(Color.decode("#eaf5f9"));
-        bodyPanel.add(new Dashboard());
+        bodyPanel.add(new MessagingRender());
 
         contentPanel.add(new SideBar(), BorderLayout.WEST);
         contentPanel.add(bodyPanel, BorderLayout.CENTER);
@@ -34,8 +34,4 @@ public class DashboardPage extends JFrame {
         this.add(contentPanel);
     }
 
-
-    public static void main(String[] args) {
-        new DashboardPage();
-    }
 }
