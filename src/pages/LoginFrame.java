@@ -1,14 +1,12 @@
-package src.pages;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.file.LinkOption;
 
 public class LoginFrame extends JFrame implements ActionListener {
 
     Container container = getContentPane();
-    JLabel userLabel = new JLabel("EMAIL");
+    JLabel userLabel = new JLabel("USERNAME");
     JLabel passwordLabel = new JLabel("PASSWORD");
     JTextField userTextField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
@@ -22,6 +20,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
+
     }
 
     public void setLayoutManager() {
@@ -59,19 +58,15 @@ public class LoginFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(userTextField.getText());
-        if (e.getSource()==loginButton && (userTextField.getText().equalsIgnoreCase("") || passwordField.getText().equalsIgnoreCase(""))){
-            JOptionPane.showMessageDialog(this, "All field are required");
-        }
         if (e.getSource() == loginButton) {
             String userText;
             String pwdText;
             userText = userTextField.getText();
             pwdText = passwordField.getText();
-            if (userText.equalsIgnoreCase("david") && pwdText.equalsIgnoreCase("12345")) {
-                JOptionPane.showMessageDialog(this, "Logged in successful");
+            if (userText.equalsIgnoreCase("mehtab") && pwdText.equalsIgnoreCase("12345")) {
+                JOptionPane.showMessageDialog(this, "Login Successful");
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid Email or Password");
+                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
 
         }
@@ -85,6 +80,8 @@ public class LoginFrame extends JFrame implements ActionListener {
             } else {
                 passwordField.setEchoChar('*');
             }
+
+
         }
     }
 }
