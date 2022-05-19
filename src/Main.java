@@ -3,9 +3,10 @@ package src;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import src.client.ClientServerConnector;
 import src.models.RequestBody;
-import src.pages.Home;
+import src.pages.NavBar;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main extends JFrame {
 
@@ -24,6 +25,7 @@ public class Main extends JFrame {
         setResizable(false);
         setVisible(true);
         setIconImage(new ImageIcon("src/img/dv.png").getImage());
+        setLayout(new BorderLayout());
 
         label = new JLabel();
         add(label);
@@ -41,8 +43,8 @@ public class Main extends JFrame {
         label.setText(response);
 
 
-        Home home = new Home();
-        add(home);
+        NavBar navBar = new NavBar();
+        this.add(navBar);
     }
 
     public static void main(String[] args) throws Exception {
