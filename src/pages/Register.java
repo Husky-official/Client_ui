@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -253,14 +254,30 @@ public class Register extends JFrame implements ActionListener {
             String email = emailField.getText();
             String dob = dobField.getText();
             UserUtils.UserGender userGender = maleRadioButton.isSelected() ? UserUtils.UserGender.MALE : UserUtils.UserGender.FEMALE;
+
             if (username.equals("") || password.equals("") || telephone.equals("") || email.equals("") || dob.equals("")) {
                 errorLabel.setText("Please fill all the fields");
             }
-            if(!Validations.isEmailValid(email).equals("OK")) errorLabel.setText(Validations.isEmailValid(email));
-            if(!Validations.isPhoneNumberValid(telephone).equals("OK")) errorLabel.setText(Validations.isPhoneNumberValid(telephone));
-            if(!Validations.isPasswordValid(password).equals("OK")) errorLabel.setText(Validations.isPasswordValid(password));
-            if(!Validations.isNameValid(username).equals("OK")) errorLabel.setText(Validations.isNameValid(username));
-            if(!Validations.isDateValid(dob).equals("OK")) errorLabel.setText(Validations.isDateValid(dob));
+            if(!Validations.isNameValid(username).equals("OK")) {
+                errorLabel.setText(Validations.isNameValid(username));
+                return;
+            }
+            else if(!Validations.isEmailValid(email).equals("OK")) {
+                errorLabel.setText(Validations.isEmailValid(email));
+                return;
+            }
+            else if(!Validations.isPhoneNumberValid(telephone).equals("OK")) {
+                errorLabel.setText(Validations.isPhoneNumberValid(telephone));
+                return;
+            }
+            else if(!Validations.isPasswordValid(password).equals("OK")) {
+                errorLabel.setText(Validations.isPasswordValid(password));
+                return;
+            }
+            else if(!Validations.isDateValid(dob).equals("OK")) {
+                errorLabel.setText(Validations.isDateValid(dob));
+                return;
+            }
 
             //sending request to the server
             try {
@@ -299,5 +316,27 @@ public class Register extends JFrame implements ActionListener {
                 throw new RuntimeException(ex);
             }
         }
+    }
+
+    private static class DateLabelFormatter extends JFormattedTextField.AbstractFormatter {
+
+        private final String datePattern = "dd/MM/yyyy";
+        private final SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+
+        @Override
+        public Object stringToValue(String text) throws ParseException {
+            return dateFormatter.parseObject(text);
+        }
+
+        @Override
+        public String valueToString(Object value) throws ParseException {
+            if (value != null) {
+                Calendar cal = (Calendar) value;
+                return dateFormatter.format(cal.getTime());
+            }
+
+            return "";
+        }
+
     }
 }
