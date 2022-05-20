@@ -6,6 +6,7 @@ import src.client.ClientServerConnector;
 import src.models.RegisterUser;
 import src.models.RequestBody;
 import src.models.UserUtils;
+import src.pages.dashboard.DashboardPage;
 import src.utils.IconTextField;
 import src.utils.registration.Validations;
 
@@ -285,8 +286,9 @@ public class Register extends JFrame implements ActionListener {
                 String actionDone = jsonResponse.get("actionToDo").asText();
                 if (status == 200) {
                     successLabel.setText(message);
+                    JOptionPane.showMessageDialog(null,message);
                     this.dispose();
-                    new Login().setVisible(true);
+                    new DashboardPage().setVisible(true);
                 }else{
                     errorLabel.setText(message);
                 }
