@@ -356,7 +356,12 @@ public class Interviewing extends JPanel {
                     JsonNode jsonResponse = objectMapper.readTree(response);
 
                     JOptionPane.showMessageDialog(null, "Scheduled a meeting Successfully");
+                    jobPostIdField.setText(" ");
+                    eventNameField.setText(" ");
+                    eventDateField.setText(" ");
+                    startTimeField.setText(" ");
 
+                    endTimeField.setText(" ");
                 }catch (Exception ex){
                     ex.getMessage();
                 }
