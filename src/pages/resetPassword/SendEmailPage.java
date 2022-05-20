@@ -6,6 +6,7 @@ import src.pages.Register;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.Objects;
 
 public class SendEmailPage extends JFrame {
@@ -60,7 +61,12 @@ public class SendEmailPage extends JFrame {
 
         //add action on login and register buttons
         this.loginButton.addActionListener(e -> {
-            Login login = new Login();
+            Login login = null;
+            try {
+                login = new Login();
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
             login.setVisible(true);
             this.dispose();
         });
