@@ -5,6 +5,7 @@ import src.pages.layout.SideBar;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.Objects;
 
 public class MessagingPage extends JFrame {
@@ -12,7 +13,7 @@ public class MessagingPage extends JFrame {
     private JPanel bodyPanel;
 
     public MessagingPage() {
-        this.setTitle("Dashboard | Hiric");
+        this.setTitle("Messaging | Hiric");
         this.setSize(1000, 600);
         this.initUI();
         this.setLocationRelativeTo((Component)null);
@@ -33,5 +34,6 @@ public class MessagingPage extends JFrame {
 
         this.add(contentPanel);
     }
+
 
 }

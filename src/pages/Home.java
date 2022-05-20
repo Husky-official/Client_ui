@@ -1,6 +1,7 @@
 package src.pages;
 
 import src.components.shared.Button;
+import src.pages.messaging.MembersAndGroups;
 import src.pages.messaging.Messages;
 
 import java.awt.BorderLayout;
@@ -73,15 +74,15 @@ public class Home extends JFrame {
             login.setVisible(true);
             this.dispose();
         });
-        this.registerButton.addActionListener(e -> {
-            Register register = new Register();
-            register.setVisible(true);
-            this.dispose();
-        });
+//        this.registerButton.addActionListener(e -> {
+//            Register register = new Register();
+//            register.setVisible(true);
+//            this.dispose();
+//        });
 
         this.registerButton.addActionListener(e -> {
-            Messages messaging = new Messages();
-            messaging.setVisible(true);
+            MembersAndGroups MembersAndGroups = new MembersAndGroups();
+            MembersAndGroups.setVisible(true);
             this.dispose();
         });
 
