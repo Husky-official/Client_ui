@@ -3,11 +3,12 @@ package src.pages;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import src.client.ClientServerConnector;
+import src.components.shared.Button;
 import src.models.RequestBody;
 import src.models.User;
+import src.pages.resetPassword.*;
 import src.pages.dashboard.DashboardPage;
 import src.utils.IconTextField;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,7 @@ public class Login extends JFrame implements ActionListener {
     JButton login = new JButton("Login");
     JButton resetButton = new JButton("Reset");
     JCheckBox showPassword = new JCheckBox("Show Password");
-
+    JButton forgotPassword ;
 
     public Login() throws FileNotFoundException {
         this.setTitle("Login | Hiric");
@@ -126,6 +127,13 @@ public class Login extends JFrame implements ActionListener {
         panel1.setBackground(this.bgColor);
         bodyContent.add(panel1);
 
+        this.forgotPassword = new Button("Forgot Password", Color.WHITE, textColor, new Font("nunito", Font.PLAIN, 15) , 0);
+        this.forgotPassword.addActionListener(e -> {
+            SendEmailPage sendEmailPage = new SendEmailPage();
+            sendEmailPage.setVisible(true);
+            this.dispose();
+        });
+
         /**
          * Add login form
          * */
@@ -172,6 +180,12 @@ public class Login extends JFrame implements ActionListener {
         resetButton.setFont(new Font("nunito", Font.PLAIN, 14));
         resetButton.setFocusPainted(false);
         resetButton.setBorderPainted(false);
+        //reset button setup
+        resetButton.setBackground(this.textColor);
+        resetButton.setForeground(Color.RED);
+        resetButton.setFont(new Font("nunito", Font.PLAIN, 14));
+        resetButton.setFocusPainted(false);
+        resetButton.setBorderPainted(false);
         //panel 2 setup
         JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayout(8,1,2,2));
@@ -184,6 +198,7 @@ public class Login extends JFrame implements ActionListener {
         panel2.add(showPassword);
         panel2.add(login);
         panel2.add(resetButton);
+        panel2.add(forgotPassword);
         bodyContent.add(panel2);
         // end of login form
         JLabel copyright = new JLabel("Copyright 2022 @husky | All Right Reserved.");
