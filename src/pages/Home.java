@@ -79,12 +79,6 @@ public class Home extends JFrame {
             this.dispose();
         });
 
-        this.registerButton.addActionListener(e -> {
-            Messages messaging = new Messages();
-            messaging.setVisible(true);
-            this.dispose();
-        });
-
         JPanel bodyContent = new JPanel();
         BoxLayout boxLayout = new BoxLayout(bodyContent, BoxLayout.Y_AXIS);
 
