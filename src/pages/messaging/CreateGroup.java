@@ -108,6 +108,7 @@ public class CreateGroup extends JFrame implements ActionListener {
         ClientServerConnector clientServerConnector=new ClientServerConnector();
         //sending request to the server
         String response=clientServerConnector.connect(requestString);
+        System.out.println(response);
         //getting response
         ObjectMapper objectMapper = new ObjectMapper();
         try {

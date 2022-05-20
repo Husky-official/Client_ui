@@ -30,7 +30,7 @@ public class MembersAndGroups extends JFrame {
         bodyPanel = new JPanel(new GridBagLayout());
 
         bodyPanel.setBackground(Color.decode("#eaf5f9"));
-        bodyPanel.add(new Dashboard());
+        bodyPanel.add(new JLabel("Group Messages"));
         loginButton = new JButton("Create Group");
         contentPanel.add(new SideBar(), BorderLayout.WEST);
         contentPanel.add(bodyPanel, BorderLayout.CENTER);

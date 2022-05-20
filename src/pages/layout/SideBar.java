@@ -1,5 +1,6 @@
 package src.pages.layout;
 
+import src.pages.messaging.MembersAndGroups;
 import src.pages.messaging.MessagingPage;
 import src.pages.dashboard.DashboardPage;
 import src.pages.profile.ProfilePage;
@@ -114,12 +115,12 @@ public class SideBar extends JPanel {
         messagingPanel.add(messaging);
         messagingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MessagingPage messagingPage = new MessagingPage();
+                MembersAndGroups messagingPage = new MembersAndGroups();
                 messagingPage.setVisible(true);
                 Frame[] frames = Frame.getFrames();
                 for(Frame fr : frames){
                     String specificFrameName = fr.getClass().getName();
-                    if(!specificFrameName.equals("src.pages.messaging.MessagingPage")){
+                    if(!specificFrameName.equals("src.pages.messaging.MembersAndGroups")){
                         if(fr.getSize().width > 600){
                             messagingPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
                         }
