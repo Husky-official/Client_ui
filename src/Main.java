@@ -14,9 +14,8 @@ import java.util.Properties;
 public class Main extends JFrame {
 
 
-    FileReader fileReader = new FileReader("./resources/application.properties");
-
-    Properties properties = new Properties();
+FileReader fileReader = new FileReader("./resources/application.properties");
+ Properties properties = new Properties();
 
     public Main() throws IOException {
 
