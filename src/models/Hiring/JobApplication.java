@@ -10,8 +10,8 @@ public class JobApplication {
     public  String referencePhone;
     public  String resume;
     public  String certificate;
-
-    public JobApplication(int id,int jobPostId,int userId,int locationId,String referenceName, String referencePhone,String resume,String certificate ){
+    public  String status;
+    public JobApplication(int id,int jobPostId,int userId,int locationId,String referenceName, String referencePhone,String resume,String certificate,String status ){
         this.id=id;
         this.jobPostId=jobPostId;
         this.userId=userId;
@@ -20,6 +20,15 @@ public class JobApplication {
         this.referencePhone=referencePhone;
         this.resume=resume;
         this.certificate=certificate;
+        this.status=status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public JobApplication() {}

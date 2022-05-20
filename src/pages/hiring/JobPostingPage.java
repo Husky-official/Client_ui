@@ -1,17 +1,19 @@
-package src.pages.Hiring;
+package src.pages.hiring;
 
+import src.pages.dashboard.Dashboard;
+import src.pages.dashboard.DashboardPage;
 import src.pages.layout.SideBar;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class JobApplicationPage extends JFrame {
+public class JobPostingPage extends JFrame {
     private JPanel contentPanel;
     private JPanel bodyPanel;
 
-    public JobApplicationPage() {
-        this.setTitle("JOB Application | Hiric");
+    public JobPostingPage() {
+        this.setTitle("JOB POSTS | Hiric");
         this.setSize(1000, 600);
         this.initUI();
         this.setLocationRelativeTo((Component)null);
@@ -26,15 +28,16 @@ public class JobApplicationPage extends JFrame {
 
 
         bodyPanel.setBackground(Color.decode("#eaf5f9"));
-        bodyPanel.add(new JobApplicationView());
+        bodyPanel.add(new JobPosting());
 
         contentPanel.add(new SideBar(), BorderLayout.WEST);
         contentPanel.add(bodyPanel, BorderLayout.CENTER);
 
         this.add(contentPanel);
     }
-    public static void main(String[] args){
-        new JobApplicationPage();
-    }
 
+
+    public static void main(String[] args) {
+        new JobPostingPage();
+    }
 }

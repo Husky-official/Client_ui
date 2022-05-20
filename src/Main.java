@@ -17,9 +17,6 @@ public class Main extends JFrame {
     Properties properties = new Properties();
 
     public Main() throws IOException {
-
-//        properties.load(fileReader);
-//        boolean logged_in = Boolean.parseBoolean(properties.getProperty("logged_in"));
         boolean logged_in = false;
         System.out.println(logged_in);
 
