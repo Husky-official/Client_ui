@@ -13,6 +13,7 @@ import src.utils.registration.Validations;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -92,7 +93,12 @@ public class Register extends JFrame implements ActionListener {
 
         //add action on login and register buttons
         loginButton.addActionListener(e -> {
-            Login login = new Login();
+            Login login = null;
+            try {
+                login = new Login();
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
             login.setVisible(true);
             this.dispose();
         });

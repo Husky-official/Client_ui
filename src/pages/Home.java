@@ -12,6 +12,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.Objects;
 import javax.swing.*;
 
@@ -69,7 +70,12 @@ public class Home extends JFrame {
 
         //add action on login and register buttons
         this.loginButton.addActionListener(e -> {
-            Login login = new Login();
+            Login login = null;
+            try {
+                login = new Login();
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
             login.setVisible(true);
             this.dispose();
         });
