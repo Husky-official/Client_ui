@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import src.client.ClientServerConnector;
 import src.models.RequestBody;
 import src.models.User;
+import src.pages.dashboard.DashboardPage;
 import src.utils.IconTextField;
 
 import javax.swing.*;
@@ -242,7 +243,7 @@ public class Login extends JFrame implements ActionListener {
                 String actionDone = jsonResponse.get("actionToDo").asText();
                 if(Objects.equals(message, "You are already logged in.") || Objects.equals(message,"User logged in successfully")){
                     JOptionPane.showMessageDialog(null,"Login Successful");
-                    new Home().setVisible(true);
+                    new DashboardPage().setVisible(true);
                     this.dispose();
                     return;
                 }
