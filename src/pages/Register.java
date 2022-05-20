@@ -1,21 +1,48 @@
 package src.pages;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import src.client.ClientServerConnector;
+import src.models.RegisterUser;
+import src.models.RequestBody;
 import src.models.UserUtils;
 import src.utils.IconTextField;
+import src.utils.registration.Validations;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
-public class Register extends JFrame {
+public class Register extends JFrame implements ActionListener {
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
     JButton registerButton;
     JButton loginButton;
+    IconTextField usernameField = new IconTextField();
+    IconTextField passwordField = new IconTextField();
+    IconTextField telephoneField = new IconTextField();
+    JRadioButton maleRadioButton = new JRadioButton("Male");
+    JRadioButton femaleRadioButton = new JRadioButton("Female");
+    JRadioButton employeeRadioButton = new JRadioButton("EMPLOYEE");
+    JRadioButton employerRadioButton = new JRadioButton("EMPLOYER");
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    JFormattedTextField dobField = new JFormattedTextField(dateFormat);
+    IconTextField emailField = new IconTextField();
+    JLabel errorLabel = new JLabel("");
+    JLabel successLabel = new JLabel("");
+    JScrollBar scrollBar;
+
 
     private JPanel panel;
+    JButton submitButton = new JButton("Register");
 
     public Register() {
         super("SignUp | Hiric");
@@ -25,6 +52,13 @@ public class Register extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         initUI();
+        addActionEvent();
+//        scrollBar = new JScrollBar();
+//        scrollBar.setPreferredSize(new Dimension(20, 20));
+//        scrollBar.setOrientation(JScrollBar.VERTICAL);
+//        scrollBar.setVisible(true);
+//        scrollBar.setBounds(0, 0, 20, 20);
+//        add(scrollBar, BorderLayout.EAST);
     }
 
 
@@ -65,7 +99,12 @@ public class Register extends JFrame {
 
         //add action on login and register buttons
         loginButton.addActionListener(e -> {
-            Login login = new Login();
+            Login login;
+            try {
+                login = new Login();
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
             login.setVisible(true);
             this.dispose();
         });
@@ -107,7 +146,6 @@ public class Register extends JFrame {
         this.add(contentPanel);
     }
     private void createUIComponents() {
-        JLabel errorLabel = new JLabel("");
         JLabel accountTypeLabel = new JLabel("Account Type:");
         JLabel usernameLabel = new JLabel("Username:");
         JLabel passwordLabel = new JLabel("Password:");
@@ -115,16 +153,6 @@ public class Register extends JFrame {
         JLabel emailLabel = new JLabel("Email:");
         JLabel genderLabel = new JLabel("Gender: ");
         JLabel dob = new JLabel("Date of Birth: ");
-        IconTextField accountTypeField = new IconTextField();
-        IconTextField usernameField = new IconTextField();
-        IconTextField passwordField = new IconTextField();
-        IconTextField telephoneField = new IconTextField();
-        JRadioButton maleRadioButton = new JRadioButton("Male");
-        JRadioButton femaleRadioButton = new JRadioButton("Female");
-        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
-        JFormattedTextField dobField = new JFormattedTextField(dateFormat);
-        IconTextField emailField = new IconTextField();
-        JButton submitButton = new JButton("Register");
         accountTypeLabel.setFont(new Font("nunito", Font.PLAIN, 15));
         usernameLabel.setFont(new Font("nunito", Font.PLAIN, 15));
         passwordLabel.setFont(new Font("nunito", Font.PLAIN, 15));
@@ -134,7 +162,9 @@ public class Register extends JFrame {
         errorLabel.setBackground(Color.WHITE);
         errorLabel.setForeground(Color.RED);
         errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        accountTypeField.setFont(new Font("nunito", Font.PLAIN, 15));
+        successLabel.setFont(new Font("nunito", Font.PLAIN, 15));
+        successLabel.setBackground(Color.WHITE);
+        successLabel.setForeground(Color.GREEN);
         usernameField.setFont(new Font("nunito", Font.PLAIN, 15));
         passwordField.setFont(new Font("nunito", Font.PLAIN, 15));
         telephoneField.setFont(new Font("nunito", Font.PLAIN, 15));
@@ -149,30 +179,27 @@ public class Register extends JFrame {
 
         submitButton.setFocusPainted(false);
         submitButton.setBorderPainted(false);
-        submitButton.addActionListener(evt -> {
-                    System.out.println("Register button clicked");
-                    String accountType = accountTypeField.getText();
-                    String username = usernameField.getText();
-                    String password = passwordField.getText();
-                    String telephone = telephoneField.getText();
-                    String email = emailField.getText();
-
-                    if (accountType.equals("") || username.equals("") || password.equals("") || telephone.equals("") || email.equals("")) {
-                        errorLabel.setText("Please fill all the fields");
-                    }
-                }
-        );
         panel = new JPanel();
-        panel.setLayout(new GridLayout(15, 1,2,2));
+        panel.setLayout(new GridLayout(20, 1,2,2));
         panel.setBackground(this.bgColor);
-        // adding radio buttons to panel in a group
-        ButtonGroup group = new ButtonGroup();
-        group.add(maleRadioButton);
-        group.add(femaleRadioButton);
+        ButtonGroup radioButtonGroup = new ButtonGroup();
+        radioButtonGroup.add(maleRadioButton);
+        radioButtonGroup.add(femaleRadioButton);
+
+        ButtonGroup accountTypeButtonGroup = new ButtonGroup();
+        accountTypeButtonGroup.add(employeeRadioButton);
+        accountTypeButtonGroup.add(employerRadioButton);
+        employeeRadioButton.setBackground(this.bgColor);
+        employeeRadioButton.setFont(new Font("nunito", Font.PLAIN, 15));
+        employeeRadioButton.setFocusPainted(false);
+        employeeRadioButton.setBorderPainted(false);
+        employeeRadioButton.setSelected(true);
+        employerRadioButton.setBackground(this.bgColor);
+        employerRadioButton.setFont(new Font("nunito", Font.PLAIN, 15));
+        employerRadioButton.setFocusPainted(false);
+        employerRadioButton.setBorderPainted(false);
         maleRadioButton.setBackground(this.bgColor);
         femaleRadioButton.setBackground(this.bgColor);
-        maleRadioButton.setForeground(Color.WHITE);
-        femaleRadioButton.setForeground(Color.WHITE);
         maleRadioButton.setFont(new Font("nunito", Font.PLAIN, 15));
         femaleRadioButton.setFont(new Font("nunito", Font.PLAIN, 15));
         maleRadioButton.setFocusPainted(false);
@@ -180,7 +207,18 @@ public class Register extends JFrame {
         maleRadioButton.setBorderPainted(false);
         femaleRadioButton.setBorderPainted(false);
         maleRadioButton.setSelected(true);
-
+        maleRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
+        femaleRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
+        JPanel radioPanel = new JPanel();
+        JPanel accountTypePanel = new JPanel();
+        radioPanel.setLayout(new BoxLayout(radioPanel, BoxLayout.X_AXIS));
+        radioPanel.setBackground(this.bgColor);
+        radioPanel.add(maleRadioButton);
+        radioPanel.add(femaleRadioButton);
+        accountTypePanel.setLayout(new BoxLayout(accountTypePanel, BoxLayout.X_AXIS));
+        accountTypePanel.setBackground(this.bgColor);
+        accountTypePanel.add(employeeRadioButton);
+        accountTypePanel.add(employerRadioButton);
         panel.add(errorLabel);
         panel.add(usernameLabel);
         panel.add(usernameField);
@@ -190,12 +228,74 @@ public class Register extends JFrame {
         panel.add(telephoneField);
         panel.add(passwordLabel);
         panel.add(passwordField);
-        panel.add(accountTypeLabel);
-        panel.add(accountTypeField);
         panel.add(dob);
         panel.add(dobField);
         panel.add(genderLabel);
+        panel.add(radioPanel);
+        panel.add(accountTypeLabel);
+        panel.add(accountTypePanel);
         panel.add(submitButton);
     }
 
+    public void addActionEvent() {
+        submitButton.addActionListener(this);
+    }
+    //listening to action
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource()==submitButton){
+            String accountType = employeeRadioButton.isSelected() ? "EMPLOYEE" : "EMPLOYER";
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            String telephone = telephoneField.getText();
+            String email = emailField.getText();
+            String dob = dobField.getText();
+            UserUtils.UserGender userGender = maleRadioButton.isSelected() ? UserUtils.UserGender.MALE : UserUtils.UserGender.FEMALE;
+            if (username.equals("") || password.equals("") || telephone.equals("") || email.equals("") || dob.equals("")) {
+                errorLabel.setText("Please fill all the fields");
+            }
+            if(!Validations.isEmailValid(email).equals("OK")) errorLabel.setText(Validations.isEmailValid(email));
+            if(!Validations.isPhoneNumberValid(telephone).equals("OK")) errorLabel.setText(Validations.isPhoneNumberValid(telephone));
+            if(!Validations.isPasswordValid(password).equals("OK")) errorLabel.setText(Validations.isPasswordValid(password));
+            if(!Validations.isNameValid(username).equals("OK")) errorLabel.setText(Validations.isNameValid(username));
+            if(!Validations.isDateValid(dob).equals("OK")) errorLabel.setText(Validations.isDateValid(dob));
+
+            //sending request to the server
+            try {
+                Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse(dob);
+                String[] names = username.split(" ");
+                String firstName = names[0];
+                String lastName = names[1];
+                UserUtils.UserRoles role = UserUtils.UserRoles.valueOf(accountType);
+                RegisterUser registerUser = new RegisterUser(1, firstName, lastName, email,password, userGender, role, birthdate);
+                RequestBody requestBody=new RequestBody();
+                requestBody.setUrl("/users");
+                requestBody.setAction("register");
+                requestBody.setObject(registerUser);
+                String requestString = new ObjectMapper().writeValueAsString(requestBody);
+                ClientServerConnector clientServerConnector=new ClientServerConnector();
+                //sending request to the server
+                String response=clientServerConnector.connect(requestString);
+                //getting response
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonResponse = objectMapper.readTree(response);
+                int status = jsonResponse.get("status").asInt();
+                String message = jsonResponse.get("message").asText();
+                String actionDone = jsonResponse.get("actionToDo").asText();
+                if (status == 200) {
+                    successLabel.setText(message);
+                    this.dispose();
+                    new Login().setVisible(true);
+                }else{
+                    errorLabel.setText(message);
+                }
+                System.out.println(message+" "+actionDone +" "+status);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (ParseException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
 }
