@@ -5,6 +5,7 @@ import src.utils.IconTextField;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
@@ -65,7 +66,12 @@ public class Register extends JFrame {
 
         //add action on login and register buttons
         loginButton.addActionListener(e -> {
-            Login login = new Login();
+            Login login = null;
+            try {
+                login = new Login();
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
             login.setVisible(true);
             this.dispose();
         });
