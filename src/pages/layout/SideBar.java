@@ -1,5 +1,6 @@
 package src.pages.layout;
 
+import src.pages.billing.Payment.PaymentPage;
 import src.pages.messaging.MessagingPage;
 import src.pages.dashboard.DashboardPage;
 import src.pages.profile.ProfilePage;
@@ -93,12 +94,23 @@ public class SideBar extends JPanel {
         JPanel modulePanel = new JPanel(new GridLayout(1, 2, 0, 0));
         modulePanel.setBackground(this.bgColor);
         modulePanel.add(new JLabel(new ImageIcon(module_img)));
-        JLabel module = new JLabel("New Module   ");
+        JLabel module = new JLabel("Payment   ");
         module.setFont(new Font("nunito", Font.ITALIC, 15));
         modulePanel.add(module);
         modulePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                System.out.println("New Module");
+                PaymentPage paymentPage = new PaymentPage();
+                paymentPage.setVisible(true);
+                Frame[] frames = Frame.getFrames();
+                for(Frame fr : frames){
+                    String specificFrameName = fr.getClass().getName();
+                    if(!specificFrameName.equals("src.pages.billing.Payment.PaymentPage")){
+                        if(fr.getSize().width > 600){
+                            paymentPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        }
+                        fr.dispose();
+                    }
+                }
             }
         });
 
