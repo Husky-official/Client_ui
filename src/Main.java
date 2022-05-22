@@ -29,11 +29,11 @@ public class Main extends JFrame {
         System.out.println(logged_in);
 
         //change layout if user logged in
-        if (logged_in){
+//        if (logged_in){
             this.add(new DashboardPage());
-        }else {
-            this.add(new Home());
-        }
+//        }else {
+//            this.add(new Home());
+//        }
     }
 
     public static void main(String[] args) throws Exception {

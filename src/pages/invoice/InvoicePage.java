@@ -1,18 +1,19 @@
-package src.pages.dashboard;
+package src.pages.invoice;
 
 import src.pages.layout.SideBar;
+import src.pages.profile.Profile;
+import src.pages.profile.ProfilePage;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class DashboardPage extends JFrame {
-
+public class InvoicePage extends JFrame{
     private JPanel contentPanel;
     private JPanel bodyPanel;
+    public InvoicePage() {
 
-    public DashboardPage() {
-        this.setTitle("Dashboard | Hiric");
+        this.setTitle("Invoice | Hiric");
         this.setSize(1000, 600);
         this.initUI();
         this.setLocationRelativeTo((Component)null);
@@ -26,15 +27,14 @@ public class DashboardPage extends JFrame {
         bodyPanel = new JPanel(new GridBagLayout());
 
         bodyPanel.setBackground(Color.decode("#eaf5f9"));
-        bodyPanel.add(new Dashboard());
+        bodyPanel.add(new Invoice());
 
         contentPanel.add(new SideBar(), BorderLayout.WEST);
         contentPanel.add(bodyPanel, BorderLayout.CENTER);
 
         this.add(contentPanel);
     }
-
     public static void main(String[] args) {
-        new DashboardPage();
+        new InvoicePage();
     }
 }
