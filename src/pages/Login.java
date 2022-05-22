@@ -3,18 +3,27 @@ package src.pages;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import src.client.ClientServerConnector;
+import src.components.shared.Button;
 import src.models.RequestBody;
 import src.models.User;
+import src.pages.resetPassword.*;
+import src.pages.dashboard.DashboardPage;
 import src.utils.IconTextField;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Properties;
 
 public class Login extends JFrame implements ActionListener {
+    FileReader fileReader = new FileReader("./resources/application.properties");
+
+    Properties properties = new Properties();
 
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
@@ -28,9 +37,9 @@ public class Login extends JFrame implements ActionListener {
     JButton login = new JButton("Login");
     JButton resetButton = new JButton("Reset");
     JCheckBox showPassword = new JCheckBox("Show Password");
+    JButton forgotPassword ;
 
-
-    public Login() {
+    public Login() throws FileNotFoundException {
         this.setTitle("Login | Hiric");
         this.setSize(1000, 600);
         this.setLocationRelativeTo((Component) null);
@@ -90,9 +99,13 @@ public class Login extends JFrame implements ActionListener {
 
         //add action on login and register buttons
         this.loginButton.addActionListener(e -> {
-            Login login = new Login();
-            login.setVisible(true);
-            this.dispose();
+            try {
+              Login login = new Login();
+                login.setVisible(true);
+                dispose();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         });
 
         this.registerButton.addActionListener(e -> {
@@ -113,6 +126,13 @@ public class Login extends JFrame implements ActionListener {
         panel1.add(welcomeText);
         panel1.setBackground(this.bgColor);
         bodyContent.add(panel1);
+
+        this.forgotPassword = new Button("Forgot Password", Color.WHITE, textColor, new Font("nunito", Font.PLAIN, 15) , 0);
+        this.forgotPassword.addActionListener(e -> {
+            SendEmailPage sendEmailPage = new SendEmailPage();
+            sendEmailPage.setVisible(true);
+            this.dispose();
+        });
 
         /**
          * Add login form
@@ -160,6 +180,12 @@ public class Login extends JFrame implements ActionListener {
         resetButton.setFont(new Font("nunito", Font.PLAIN, 14));
         resetButton.setFocusPainted(false);
         resetButton.setBorderPainted(false);
+        //reset button setup
+        resetButton.setBackground(this.textColor);
+        resetButton.setForeground(Color.RED);
+        resetButton.setFont(new Font("nunito", Font.PLAIN, 14));
+        resetButton.setFocusPainted(false);
+        resetButton.setBorderPainted(false);
         //panel 2 setup
         JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayout(8,1,2,2));
@@ -172,6 +198,7 @@ public class Login extends JFrame implements ActionListener {
         panel2.add(showPassword);
         panel2.add(login);
         panel2.add(resetButton);
+        panel2.add(forgotPassword);
         bodyContent.add(panel2);
         // end of login form
         JLabel copyright = new JLabel("Copyright 2022 @husky | All Right Reserved.");
@@ -239,10 +266,23 @@ public class Login extends JFrame implements ActionListener {
                 JsonNode jsonResponse = objectMapper.readTree(response);
                 int status = jsonResponse.get("status").asInt();
                 String message = jsonResponse.get("message").asText();
+                System.out.println(message);
                 String actionDone = jsonResponse.get("actionToDo").asText();
                 if(Objects.equals(message, "You are already logged in.") || Objects.equals(message,"User logged in successfully")){
                     JOptionPane.showMessageDialog(null,"Login Successful");
-                    new Home().setVisible(true);
+                    properties.load(fileReader);
+                    properties.setProperty("logged_in", true+"");
+                    //fileWriter
+                    FileWriter fileWriter = new FileWriter("./resources/application.properties");
+                    try {
+                        fileWriter.write("logged_in="+true+"\n");
+                        fileWriter.flush();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    System.out.println(properties.getProperty("logged_in"));
+//                    properties.save();
+                    new DashboardPage().setVisible(true);
                     this.dispose();
                     return;
                 }
