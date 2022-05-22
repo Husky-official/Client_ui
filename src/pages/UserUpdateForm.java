@@ -62,17 +62,17 @@ public class UserUpdateForm extends JFrame{
         loginButton.setFocusPainted(false);
 
         //add action on login and register buttons
-        loginButton.addActionListener(e -> {
-            Login login = new Login();
-            login.setVisible(true);
-            this.dispose();
-        });
-
-        registerButton.addActionListener(e -> {
-            Register register = new Register();
-            register.setVisible(true);
-            this.dispose();
-        });
+//        loginButton.addActionListener(e -> {
+//            Login login = new Login();
+//            login.setVisible(true);
+//            this.dispose();
+//        });
+//
+//        registerButton.addActionListener(e -> {
+//            Register register = new Register();
+//            register.setVisible(true);
+//            this.dispose();
+//        });
 
         JPanel bodyContent = new JPanel();
         BoxLayout boxLayout = new BoxLayout(bodyContent, BoxLayout.Y_AXIS);
