@@ -1,17 +1,5 @@
 package src.pages;
 
-<<<<<<< HEAD
-import src.models.UserUtils;
-import src.utils.IconTextField;
-
-import javax.swing.*;
-import java.awt.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Objects;
-
-public class Register extends JFrame {
-=======
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import src.client.ClientServerConnector;
@@ -35,16 +23,10 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Register extends JFrame implements ActionListener {
->>>>>>> main
     private final Color textColor = Color.decode("#283A6D");
     private final Color bgColor = Color.decode("#F2F6FF");
     JButton registerButton;
     JButton loginButton;
-<<<<<<< HEAD
-
-    private JPanel panel;
-
-=======
     IconTextField usernameField = new IconTextField();
     IconTextField passwordField = new IconTextField();
     IconTextField telephoneField = new IconTextField();
@@ -63,7 +45,6 @@ public class Register extends JFrame implements ActionListener {
     private JPanel panel;
     JButton submitButton = new JButton("Register");
 
->>>>>>> main
     public Register() {
         super("SignUp | Hiric");
         createUIComponents();
@@ -72,8 +53,6 @@ public class Register extends JFrame implements ActionListener {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         initUI();
-<<<<<<< HEAD
-=======
         addActionEvent();
 //        scrollBar = new JScrollBar();
 //        scrollBar.setPreferredSize(new Dimension(20, 20));
@@ -81,7 +60,6 @@ public class Register extends JFrame implements ActionListener {
 //        scrollBar.setVisible(true);
 //        scrollBar.setBounds(0, 0, 20, 20);
 //        add(scrollBar, BorderLayout.EAST);
->>>>>>> main
     }
 
 
@@ -122,16 +100,12 @@ public class Register extends JFrame implements ActionListener {
 
         //add action on login and register buttons
         loginButton.addActionListener(e -> {
-<<<<<<< HEAD
-            Login login = new Login();
-=======
             Login login;
             try {
                 login = new Login();
             } catch (FileNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
->>>>>>> main
             login.setVisible(true);
             this.dispose();
         });
@@ -173,10 +147,6 @@ public class Register extends JFrame implements ActionListener {
         this.add(contentPanel);
     }
     private void createUIComponents() {
-<<<<<<< HEAD
-        JLabel errorLabel = new JLabel("");
-=======
->>>>>>> main
         JLabel accountTypeLabel = new JLabel("Account Type:");
         JLabel usernameLabel = new JLabel("Username:");
         JLabel passwordLabel = new JLabel("Password:");
@@ -184,19 +154,6 @@ public class Register extends JFrame implements ActionListener {
         JLabel emailLabel = new JLabel("Email:");
         JLabel genderLabel = new JLabel("Gender: ");
         JLabel dob = new JLabel("Date of Birth: ");
-<<<<<<< HEAD
-        IconTextField accountTypeField = new IconTextField();
-        IconTextField usernameField = new IconTextField();
-        IconTextField passwordField = new IconTextField();
-        IconTextField telephoneField = new IconTextField();
-        JRadioButton maleRadioButton = new JRadioButton("Male");
-        JRadioButton femaleRadioButton = new JRadioButton("Female");
-        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
-        JFormattedTextField dobField = new JFormattedTextField(dateFormat);
-        IconTextField emailField = new IconTextField();
-        JButton submitButton = new JButton("Register");
-=======
->>>>>>> main
         accountTypeLabel.setFont(new Font("nunito", Font.PLAIN, 15));
         usernameLabel.setFont(new Font("nunito", Font.PLAIN, 15));
         passwordLabel.setFont(new Font("nunito", Font.PLAIN, 15));
@@ -206,13 +163,9 @@ public class Register extends JFrame implements ActionListener {
         errorLabel.setBackground(Color.WHITE);
         errorLabel.setForeground(Color.RED);
         errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
-<<<<<<< HEAD
-        accountTypeField.setFont(new Font("nunito", Font.PLAIN, 15));
-=======
         successLabel.setFont(new Font("nunito", Font.PLAIN, 15));
         successLabel.setBackground(Color.WHITE);
         successLabel.setForeground(Color.GREEN);
->>>>>>> main
         usernameField.setFont(new Font("nunito", Font.PLAIN, 15));
         passwordField.setFont(new Font("nunito", Font.PLAIN, 15));
         telephoneField.setFont(new Font("nunito", Font.PLAIN, 15));
@@ -227,32 +180,6 @@ public class Register extends JFrame implements ActionListener {
 
         submitButton.setFocusPainted(false);
         submitButton.setBorderPainted(false);
-<<<<<<< HEAD
-        submitButton.addActionListener(evt -> {
-                    System.out.println("Register button clicked");
-                    String accountType = accountTypeField.getText();
-                    String username = usernameField.getText();
-                    String password = passwordField.getText();
-                    String telephone = telephoneField.getText();
-                    String email = emailField.getText();
-
-                    if (accountType.equals("") || username.equals("") || password.equals("") || telephone.equals("") || email.equals("")) {
-                        errorLabel.setText("Please fill all the fields");
-                    }
-                }
-        );
-        panel = new JPanel();
-        panel.setLayout(new GridLayout(15, 1,2,2));
-        panel.setBackground(this.bgColor);
-        // adding radio buttons to panel in a group
-        ButtonGroup group = new ButtonGroup();
-        group.add(maleRadioButton);
-        group.add(femaleRadioButton);
-        maleRadioButton.setBackground(this.bgColor);
-        femaleRadioButton.setBackground(this.bgColor);
-        maleRadioButton.setForeground(Color.WHITE);
-        femaleRadioButton.setForeground(Color.WHITE);
-=======
         panel = new JPanel();
         panel.setLayout(new GridLayout(20, 1,2,2));
         panel.setBackground(this.bgColor);
@@ -274,7 +201,6 @@ public class Register extends JFrame implements ActionListener {
         employerRadioButton.setBorderPainted(false);
         maleRadioButton.setBackground(this.bgColor);
         femaleRadioButton.setBackground(this.bgColor);
->>>>>>> main
         maleRadioButton.setFont(new Font("nunito", Font.PLAIN, 15));
         femaleRadioButton.setFont(new Font("nunito", Font.PLAIN, 15));
         maleRadioButton.setFocusPainted(false);
@@ -282,9 +208,6 @@ public class Register extends JFrame implements ActionListener {
         maleRadioButton.setBorderPainted(false);
         femaleRadioButton.setBorderPainted(false);
         maleRadioButton.setSelected(true);
-<<<<<<< HEAD
-
-=======
         maleRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
         femaleRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
         JPanel radioPanel = new JPanel();
@@ -297,7 +220,6 @@ public class Register extends JFrame implements ActionListener {
         accountTypePanel.setBackground(this.bgColor);
         accountTypePanel.add(employeeRadioButton);
         accountTypePanel.add(employerRadioButton);
->>>>>>> main
         panel.add(errorLabel);
         panel.add(usernameLabel);
         panel.add(usernameField);
@@ -307,16 +229,6 @@ public class Register extends JFrame implements ActionListener {
         panel.add(telephoneField);
         panel.add(passwordLabel);
         panel.add(passwordField);
-<<<<<<< HEAD
-        panel.add(accountTypeLabel);
-        panel.add(accountTypeField);
-        panel.add(dob);
-        panel.add(dobField);
-        panel.add(genderLabel);
-        panel.add(submitButton);
-    }
-
-=======
         panel.add(dob);
         panel.add(dobField);
         panel.add(genderLabel);
@@ -388,5 +300,4 @@ public class Register extends JFrame implements ActionListener {
             }
         }
     }
->>>>>>> main
 }
