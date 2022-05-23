@@ -9,7 +9,7 @@ import java.net.Socket;
 public class ClientServerConnector {
     public String connect(String requestBody) {
         try{
-            Socket socket = new Socket("localhost", 8888);
+            Socket socket = new Socket("localhost", 9000);
             DataOutputStream requestOut = new DataOutputStream(socket.getOutputStream());
             DataInputStream responseIn = new DataInputStream(socket.getInputStream());
 
