@@ -5,6 +5,10 @@ import src.pages.Login;
 
 import javax.swing.*;
 import java.awt.*;
+<<<<<<< HEAD
+=======
+import java.io.FileNotFoundException;
+>>>>>>> main
 import java.util.Objects;
 
 public class Messages extends JFrame {
@@ -95,7 +99,16 @@ public class Messages extends JFrame {
          * action to the for back button
          */
         this.goBack.addActionListener(event -> {
+<<<<<<< HEAD
             Login login = new Login();
+=======
+            Login login = null;
+            try {
+                login = new Login();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+>>>>>>> main
             login.setVisible(true);
             this.dispose();
         });
