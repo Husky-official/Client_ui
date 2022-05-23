@@ -5,10 +5,7 @@ import src.pages.Login;
 
 import javax.swing.*;
 import java.awt.*;
-<<<<<<< HEAD
-=======
 import java.io.FileNotFoundException;
->>>>>>> main
 import java.util.Objects;
 
 public class Messages extends JFrame {
@@ -83,10 +80,10 @@ public class Messages extends JFrame {
 //        chat.setLayout(memberLayout);
 //        chat.setBackground(Color.yellow);
 //        for(int i = 0; i < 5; i++) {
-            JPanel message = new JPanel();
-            message.setBackground(Color.blue);
-            message.setBounds(0, 0, 400, 100);
-            activeChatPanel.add(message);
+        JPanel message = new JPanel();
+        message.setBackground(Color.blue);
+        message.setBounds(0, 0, 400, 100);
+        activeChatPanel.add(message);
 //        }
 
         this.goBack.setBackground(this.textColor);
@@ -99,16 +96,12 @@ public class Messages extends JFrame {
          * action to the for back button
          */
         this.goBack.addActionListener(event -> {
-<<<<<<< HEAD
-            Login login = new Login();
-=======
             Login login = null;
             try {
                 login = new Login();
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
->>>>>>> main
             login.setVisible(true);
             this.dispose();
         });
