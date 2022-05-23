@@ -307,7 +307,6 @@ public class Interviewing extends JPanel {
         });
         //add form button events
         this.registerButton.addActionListener(e -> {
-
 //            System.out.println("Create Meeting button clicked");
             if (e.getSource() == registerButton){
                 String jobId = jobPostIdField.getText();
@@ -360,7 +359,6 @@ public class Interviewing extends JPanel {
                     eventNameField.setText(" ");
                     eventDateField.setText(" ");
                     startTimeField.setText(" ");
-
                     endTimeField.setText(" ");
                 }catch (Exception ex){
                     ex.getMessage();
