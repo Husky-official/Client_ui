@@ -11,14 +11,8 @@ import java.io.IOException;
 public class Main extends JFrame {
 
 
-<<<<<<< HEAD
-    FileReader fileReader = new FileReader("./resources/application.properties");
-
-    Properties properties = new Properties();
-=======
 //FileReader fileReader = new FileReader("./resources/application.properties");
 // Properties properties = new Properties();
->>>>>>> main
 
     public Main() throws IOException {
 
@@ -26,7 +20,7 @@ public class Main extends JFrame {
 //        boolean logged_in = Boolean.parseBoolean(properties.getProperty("logged_in"));
 //        System.out.println(logged_in);
 
-        boolean logged_in = false;
+        boolean logged_in = true;
         //change layout if user logged in
         if (logged_in){
             this.add(new DashboardPage());
