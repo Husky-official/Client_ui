@@ -1,19 +1,17 @@
 package src.pages.hiring;
 
-
 import src.pages.layout.SideBar;
 
 import javax.swing.*;
-import javax.swing.text.View;
 import java.awt.*;
 import java.util.Objects;
 
-public class AddJobPostPage extends JFrame {
+public class ViewJobPostsPage extends JFrame{
     private JPanel contentPanel;
     private JPanel bodyPanel;
 
-    public AddJobPostPage() {
-        this.setTitle("HIRIC | Add a job post");
+    public ViewJobPostsPage() {
+        this.setTitle("HIRIC | View Job Posts");
         this.setSize(1000, 600);
         this.initUI();
         this.setLocationRelativeTo((Component)null);
@@ -28,7 +26,7 @@ public class AddJobPostPage extends JFrame {
 
 
         bodyPanel.setBackground(Color.decode("#eaf5f9"));
-        bodyPanel.add(new AddJobPost());
+        bodyPanel.add(new ViewJobPosts());
 
         contentPanel.add(new SideBar(), BorderLayout.WEST);
         contentPanel.add(bodyPanel, BorderLayout.CENTER);
