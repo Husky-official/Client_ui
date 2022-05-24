@@ -40,14 +40,14 @@ public class HiringPage extends JFrame {
 
         jobPosting.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JobPostingPage jobPostingPage = new JobPostingPage();
-                jobPostingPage.setVisible(true);
+                AddJobPostPage addJobPostPage = new AddJobPostPage();
+                addJobPostPage.setVisible(true);
                 Frame[] frames = Frame.getFrames();
                 for(Frame fr : frames){
                     String specificFrameName = fr.getClass().getName();
-                    if(!specificFrameName.equals("src.pages.hiring.JobPostingPage")){
+                    if(!specificFrameName.equals("src.pages.hiring.AddJobPostPage")){
                         if(fr.getSize().width > 600){
-                            jobPostingPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                            addJobPostPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
                         }
                         fr.dispose();
                     }

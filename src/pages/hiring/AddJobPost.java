@@ -56,23 +56,23 @@ public class AddJobPost extends JPanel {
         headLeftPanel.setPreferredSize(new Dimension(500, 50));
         headLeftPanel.setBackground(this.bgColor);
 
-        viewJobPosts = new Button("View job posts", Color.WHITE, this.textColor,new Font("nunito", Font.BOLD, 18), 16, 80, 30,5 );
-        viewJobPosts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JobPostingPage jobPostingPage = new JobPostingPage();
-                jobPostingPage.setVisible(true);
-                Frame[] frames = Frame.getFrames();
-                for(Frame fr : frames){
-                    String specificFrameName = fr.getClass().getName();
-                    if(!specificFrameName.equals("src.pages.hiring.JobPostingPage")){
-                        if(fr.getSize().width > 600){
-                            jobPostingPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                        }
-                        fr.dispose();
-                    }
-                }
-            }
-        });
+//        viewJobPosts = new Button("View job posts", Color.WHITE, this.textColor,new Font("nunito", Font.BOLD, 18), 16, 80, 30,5 );
+//        viewJobPosts.addMouseListener(new java.awt.event.MouseAdapter() {
+//            public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                JobPostingPage jobPostingPage = new JobPostingPage();
+//                jobPostingPage.setVisible(true);
+//                Frame[] frames = Frame.getFrames();
+//                for(Frame fr : frames){
+//                    String specificFrameName = fr.getClass().getName();
+//                    if(!specificFrameName.equals("src.pages.hiring.JobPostingPage")){
+//                        if(fr.getSize().width > 600){
+//                            jobPostingPage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//                        }
+//                        fr.dispose();
+//                    }
+//                }
+//            }
+//        });
 
         submitData = new Button("Submit", Color.WHITE, this.textColor,new Font("nunito", Font.BOLD, 18), 16, 80, 30,5 );
         submitData.addActionListener(evt -> {
@@ -128,13 +128,20 @@ public class AddJobPost extends JPanel {
 
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonResponse = objectMapper.readTree(response);
-
-                int status = jsonResponse.get("status").asInt();
                 String message = jsonResponse.get("message").asText();
-                String actionDone = jsonResponse.get("actionToDo").asText();
                 System.out.println(message);
                 if(Objects.equals(message, "Posted Job Successfully")){
                     JOptionPane.showMessageDialog(null,"Posted successfully!");
+                    jobIdField.setText("");
+                    jobDescField.setText("");
+                    jobReqField.setText("");
+                    salaryField.setText("");
+                    salaryTypeField.setText("");
+                    locationField.setText("");
+                    startDateField.setText("");
+                    startTimeField.setText("");
+                    durationField.setText("");
+                    workersField.setText("");
                 }
                 else{
                     JOptionPane.showMessageDialog(null,"Unable to post the job!");
@@ -148,7 +155,7 @@ public class AddJobPost extends JPanel {
         breadCrumb.setFont(new Font("nunito", Font.BOLD, 16));
         breadCrumb.setForeground(this.textColor);
         headLeftPanel.add(breadCrumb);
-        headRightPanel.add(viewJobPosts);
+//        headRightPanel.add(viewJobPosts);
         headerPanel.add(headLeftPanel, BorderLayout.WEST);
         headerPanel.add(headRightPanel, BorderLayout.EAST);
 
