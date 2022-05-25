@@ -31,7 +31,7 @@ public class JobPostingPage extends JFrame {
         bodyPanel.add(new AddJobPostPage());
 
         contentPanel.add(new SideBar(), BorderLayout.WEST);
-        contentPanel.add(bodyPanel, BorderLayout.CENTER);
+        contentPanel.add(bodyPanel);
 
         this.add(contentPanel);
     }

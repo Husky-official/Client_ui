@@ -36,6 +36,6 @@ public class ViewJobPostsPage extends JFrame{
 
 
     public static void main(String[] args) {
-        new JobPostingPage();
+        new ViewJobPostsPage();
     }
 }
