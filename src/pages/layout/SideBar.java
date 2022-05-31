@@ -1,5 +1,5 @@
 package src.pages.layout;
-
+import src.pages.invoice.InvoicePage;
 import src.pages.billing.Payment.PaymentPage;
 import src.pages.messaging.MessagingPage;
 import src.pages.dashboard.DashboardPage;
@@ -152,6 +152,19 @@ public class SideBar extends JPanel {
         invoicePanel.add(invoice);
         invoicePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InvoicePage invoicePage = new InvoicePage();
+                invoicePage.setVisible(true);
+                Frame[] frames = Frame.getFrames();
+
+                for(Frame fr : frames){
+                    String specificFrameName = fr.getClass().getName();
+                    if(!specificFrameName.equals("src.pages.invoice.InvoicePage")){
+                        if(fr.getSize().width > 600){
+                            invoicePage.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        }
+                        fr.dispose();
+                    }
+                }
                 System.out.println("Invoice");
             }
         });

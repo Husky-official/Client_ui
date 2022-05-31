@@ -6,6 +6,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 
 public class Button extends JButton {
@@ -18,29 +19,6 @@ public class Button extends JButton {
     private int buttonWidth;
     private int buttonHeight;
     private int radius;
-
-    public Button(String content, Color foreGround, Color backgroundColor, Font textFont, int textSize, int buttonWidth, int buttonHeight, int radius) {
-        this.content = content;
-        this.foreGround = foreGround;
-        this.backgroundColor = backgroundColor;
-        this.textFont = textFont;
-        this.textSize = textSize;
-        this.buttonWidth = buttonWidth;
-        this.buttonHeight = buttonHeight;
-        this.radius = radius;
-        this.setBackground(backgroundColor);
-        this.initColors();
-    }
-
-    public void initColors() {
-        this.setContentAreaFilled(false);
-        this.setFocusPainted(false);
-        this.setText(this.content);
-        this.setFont(this.textFont);
-        this.setForeground(this.foreGround);
-        this.setSize(this.buttonWidth, this.buttonHeight);
-        this.setBorderPainted(false);
-    }
 
     public String getContent() {
         return this.content;
@@ -101,7 +79,39 @@ public class Button extends JButton {
     public int getButtonHeight() {
         return this.buttonHeight;
     }
+    public void setButtonHeight(int buttonHeight) {
+        this.buttonHeight = buttonHeight;
+    }
+    public int getRadius() {
+        return this.radius;
+    }
 
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
+
+    public Button(String content, Color foreGround, Color backgroundColor, Font textFont, int textSize, int buttonWidth, int buttonHeight, int radius) {
+        this.content = content;
+        this.foreGround = foreGround;
+        this.backgroundColor = backgroundColor;
+        this.textFont = textFont;
+        this.textSize = textSize;
+        this.buttonWidth = buttonWidth;
+        this.buttonHeight = buttonHeight;
+        this.radius = radius;
+        this.setBackground(backgroundColor);
+        this.initColors();
+    }
+
+    public void initColors() {
+        this.setContentAreaFilled(false);
+        this.setFocusPainted(false);
+        this.setText(this.content);
+        this.setFont(this.textFont);
+        this.setForeground(this.foreGround);
+        this.setSize(this.buttonWidth, this.buttonHeight);
+        this.setBorderPainted(false);
+    }
     public Button(String content, Color foreGround, String linearGradient, Font textFont, int textSize, int buttonWidth, int buttonHeight, int radius) {
         this.content = content;
         this.foreGround = foreGround;
@@ -122,18 +132,7 @@ public class Button extends JButton {
         this.radius = radius;
         this.initColors();
     }
-
-    public void setButtonHeight(int buttonHeight) {
-        this.buttonHeight = buttonHeight;
-    }
-
-    public int getRadius() {
-        return this.radius;
-    }
-
-    public void setRadius(int radius) {
-        this.radius = radius;
-    }
+    
 
     protected void paintComponent(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D)graphics;
